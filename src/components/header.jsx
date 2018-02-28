@@ -25,7 +25,7 @@ class Header extends Component {
             id = shortid.generate();
             localStorage.setItem(name,id);
         }
-        console.log('id', id)
+        //console.log('User initialise id ->', id)
         this.setState({userID:id});
 
     }
