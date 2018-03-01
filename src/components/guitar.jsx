@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 
 import guitarConfig from '../json/guitar.json'
 
-const guitarType = 'standartGuitar';
+const GUITAR_TYPE = 'standartGuitar';
 
 class Guitar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            guitarType:'standartGuitar',
+            guitarType: GUITAR_TYPE,
         }
     }
 
