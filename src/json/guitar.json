@@ -2,7 +2,7 @@
     "standartGuitar":{
         "strings": ["E", "a", "d", "g", "b", "e"],
         "guitarNeck": "guitar-neck",
-        "fret":[
+        "frets":[
             {
                 "1":{"note":"E"},
                 "2":{"note":"A"},

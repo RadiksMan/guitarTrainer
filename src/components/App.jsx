@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 
-import Guitar from './guitar';
+import Fingerboard from './Fingerboard/Fingerboard';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Guitar />
+        <Fingerboard />
       </div>
     );
   }
