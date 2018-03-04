@@ -128,7 +128,11 @@
 
 .f0 {
     right: 96.8%;
-    border-right: 0.8ex white solid;
+	border-right: 0.8ex white solid;
+	
+	.note {
+		margin-left: -0.4ex;
+	}
 }
 
 .string {
@@ -225,16 +229,46 @@
 	border: 1px solid transparent;
 	border-radius: 50%;
 	z-index: 3;
+	text-align: center;
 	left: 50%;
 	margin-left: -1.3ex;
 	text-align: center;
 	background: white;
-	opacity: 0.7;
-  	margin-top: -3px;
-	transition: all ease .3s;
+	opacity: 0;
+	visibility: hidden;
+	margin-top: -3px;
+	padding-top: 1px;
+	transition: opacity ease .3s,visibility ease .3s;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	span{transition: all ease .3s;opacity: 0;visibility: hidden;}
+	&:after{
+		content: '?';position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);opacity: 0;visibility: hidden;transition:all ease .3s;
+	}
+
+	&.question{
+		opacity: 0.7;
+		visibility: visible;
+		&:after{opacity: 1;visibility: visible;}
+	}
+	&.answer-correct{
+		opacity: 1;
+		visibility: visible;
+		background: green;
+		color: white;
+		span{opacity: 1;visibility: visible}
+		&:after{opacity: 0;visibility: hidden;}
+	}
+	&.answer-wrong{
+		opacity: 1;
+		visibility: visible;
+		background-color: firebrick;
+		color:white;
+		span{opacity: 1;visibility: visible}
+		&:after{opacity: 0;visibility: hidden;}
+	}
 }
 
 .n1 {

@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 
 import guitarConfig from '../../json/guitar.json';
-import './Fingerboard.css';
+import './style/Fingerboard.css';
 
 const GUITAR_TYPE = 'standartGuitar';
 
 class Fingerboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            guitarType: GUITAR_TYPE,
-        }
+    
+    state = {
+        guitarType: GUITAR_TYPE,
     }
 
     renderGuitar() {
@@ -25,14 +23,14 @@ class Fingerboard extends Component {
                         const classFretName = `fret f${index}`;
                         var notesForEach = [];
                         
-                        Object.keys(fret).forEach(function (key) {
+                        Object.keys(fret).forEach((key) => {
 
                             const {note} = fret[key];
                             const classNotesName = `note n${key} ${note.toLowerCase()}`;
 
                             notesForEach.push(
                                 <div key={key} className={classNotesName}>
-                                    {note}
+                                    <span>{note}</span>
                                 </div>
                             );
                         })
