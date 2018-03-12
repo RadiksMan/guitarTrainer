@@ -1,24 +1,26 @@
 import React, { PureComponent } from 'react';
-import './style/FingerboardButtons';
+import './style/FingerboardButtons.css';
 
 class FingerboardButtons extends PureComponent {
     render() {
         return (
             <div className="FingerboardButtons">
-                <h2>Choose Note:</h2>
-                <ul>
-                    <li>A</li>
-                    <li>A#</li>
-                    <li>B</li>
-                    <li>C</li>
-                    <li>C#</li>
-                    <li>D</li>
-                    <li>D#</li>
-                    <li>E</li>
-                    <li>F</li>
-                    <li>F#</li>
-                    <li>G</li>
-                    <li>G#</li>
+                <div className="start-button">
+                    START
+                </div>
+                <ul className="notes-list">
+                    <li data-note="a">A</li>
+                    <li data-note="a#">A#</li>
+                    <li data-note="b">B</li>
+                    <li data-note="c">C</li>
+                    <li data-note="c#">C#</li>
+                    <li data-note="d">D</li>
+                    <li data-note="d#">D#</li>
+                    <li data-note="e">E</li>
+                    <li data-note="f">F</li>
+                    <li data-note="f#">F#</li>
+                    <li data-note="g">G</li>
+                    <li data-note="g#">G#</li>
                 </ul>
             </div>
         );
