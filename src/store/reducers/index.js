@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import UserReducer from './reducer_user';
-import GuitarReducer from './reducer_guitar';
+import UserReducer from './user';
+import GuitarReducer from './guitar';
 
 const rootReducer = combineReducers({
     user:UserReducer,
