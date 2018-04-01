@@ -1,12 +1,19 @@
 import React, { PureComponent } from 'react';
+import {connect} from 'react-redux';
+
 import './style/FingerboardButtons.css';
+import {trainStart,trainEnd} from '../../store/actions/guitar';
 
 class FingerboardButtons extends PureComponent {
     render() {
+        const {trainingStart,questionNote} = this.props;
         return (
             <div className="FingerboardButtons">
-                <div className="start-button">
-                    START
+                <div 
+                    className="start-button"
+                    onClick={()=> !trainingStart ? this.props.trainStart() : this.props.trainEnd()}
+                >
+                    {!trainingStart ? 'START': 'END'}
                 </div>
                 <ul className="notes-list">
                     <li data-note="a">A</li>
@@ -27,4 +34,17 @@ class FingerboardButtons extends PureComponent {
     }
 }
 
-export default FingerboardButtons;
+const mapStateToProps = state => {
+    return {
+        trainingStart:state.guitar.trainingStart,
+        questionNote:state.guitar.questionNote,
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {
+        trainStart,
+        trainEnd
+    }
+)(FingerboardButtons);

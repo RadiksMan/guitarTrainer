@@ -73,7 +73,6 @@ class Fingerboard extends Component {
 
 
     render() {
-        console.log('guitarConfig', guitarConfig)
         return (
             <div>
                 {this.renderGuitar()}

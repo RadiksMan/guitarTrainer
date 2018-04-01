@@ -1,25 +1,38 @@
 import * as actionTypes from '../actions/actionTypes';
 import * as guitars from '../../json/guitar.json';
 
-const initialState = {
-    trainingStart:false,
-    guitarType:'standartGuitar',
-    guitarConfig:guitars['standartGuitar']
+import {generateNoteQuestion} from '../../services/guitarQuest';
+const guitarStage = {
+    
 }
 
+const initialState = {
+    guitarType: 'standartGuitar',
+    guitarConfig: guitars['standartGuitar'],
+    
+    trainingStart: false,
+    stage:null,
+    questionNote:false,
+}
 
 export default (state = initialState, action) => {
-    console.log('initialState', initialState)
-    switch(action.type){
-        
+
+    switch (action.type) {
+
         case actionTypes.START_TRAIN:
-            return{
+            return {
                 ...state,
-                trainingStart:true,
+                trainingStart: true,
+                questionNote:generateNoteQuestion(state.guitarConfig,state.questionNote)
             };
-        
+        case actionTypes.END_TRAIN:
+            return {
+                ...state,
+                trainingStart: false,
+            };
+
 
         default:
-        return state;
+            return state;
     }
 }
