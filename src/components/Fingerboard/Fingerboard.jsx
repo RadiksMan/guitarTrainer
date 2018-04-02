@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 import guitarConfig from '../../json/guitar.json';
 import './style/Fingerboard.css';
@@ -9,6 +10,17 @@ class Fingerboard extends Component {
     
     state = {
         guitarType: GUITAR_TYPE,
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps){
+        if (nextProps.questionNote !== this.props.questionNote){
+            this.showQuestionArrow(nextProps.questionNote)
+        }
+    }
+
+    showQuestionArrow = (questionNote) => {
+ console.log("questionNote ", questionNote);
+
     }
 
     renderGuitar() {
@@ -71,14 +83,27 @@ class Fingerboard extends Component {
         )
     }
 
-
     render() {
+        const {trainingStart,questionNote} = this.props;
         return (
             <div>
+                <div className="arrow">
+                    <div className="arrowBody"></div>
+                </div>
                 {this.renderGuitar()}
             </div>
         )
     }
 }
 
-export default Fingerboard;
+const mapStateToProps = state => {
+    return {
+        trainingStart:state.guitar.trainingStart,
+        questionNote:state.guitar.questionNote,
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(Fingerboard);

@@ -294,3 +294,11 @@
 .n6 {
 	top: 154px;
 }
+
+
+.arrow{position: absolute;left:10%;top:10%;z-index: 2;
+	.arrowBody{
+		&:after{width: 1.2em;height: 1.2em;content: '';border-right:3px solid white;border-bottom: 3px  solid white;position: absolute;}
+		&:before{}
+	}
+}
