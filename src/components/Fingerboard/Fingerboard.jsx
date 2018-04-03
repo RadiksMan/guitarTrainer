@@ -86,8 +86,8 @@ class Fingerboard extends Component {
     render() {
         const {trainingStart,questionNote} = this.props;
         return (
-            <div>
-                <div className="arrow">
+            <div style={{position:'relative'}} className="guitar">
+                <div className="arrow active">
                     <div className="arrowBody"></div>
                 </div>
                 {this.renderGuitar()}
