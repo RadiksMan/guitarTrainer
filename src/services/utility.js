@@ -7,3 +7,11 @@ export const pickRandomProperty = (obj) =>{
            result = prop;
     return result;
 }
+
+export const getOffset = el => {
+    el = el.getBoundingClientRect();
+    return {
+        left: el.left + window.scrollX,
+        top: el.top + window.scrollY
+    };
+};
