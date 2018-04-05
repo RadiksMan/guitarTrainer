@@ -296,7 +296,7 @@
 }
 
 
-.arrow{position: absolute;left:10%;top:10%;z-index: 2;    height: 1px;width: 1px;outline: 1px solid red;transition:all ease .3s;opacity:0;visibility:hidden;pointer-events:none;
+.arrow{position: absolute;left:49%;top:49%;z-index: 2;transition:all ease .3s;opacity:0;visibility:hidden;pointer-events:none;width: 1px;height: 1px;margin-left: -1px;
 	&.active{opacity:1;visibility: visible;pointer-events:all;
 		.arrowBody{animation-play-state: running;}
 	}

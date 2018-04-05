@@ -55,7 +55,7 @@ class Fingerboard extends Component {
             top:questionNoteDomPos.top - guitarNeckPos.top,
         }
 
-        arrow.style.left = questionNotePos.left+'px';
+        arrow.style.left = questionNotePos.left + questionNoteDom.offsetWidth/2 +'px';
         arrow.style.top = questionNotePos.top+'px';
 
         console.log("questionNotePos ", questionNotePos);
@@ -131,7 +131,7 @@ class Fingerboard extends Component {
             <div style={{position:'relative'}} className="guitar">
 
                 <div 
-                    className="arrow active"
+                    className="arrow"
                     ref={this.arrowRef} 
                 >
                     <div className="arrowBody"></div>

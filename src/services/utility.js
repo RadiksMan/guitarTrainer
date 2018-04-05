@@ -8,6 +8,7 @@ export const pickRandomProperty = (obj) =>{
     return result;
 }
 
+//get element position (in document)
 export const getOffset = el => {
     el = el.getBoundingClientRect();
     return {
