@@ -2,16 +2,18 @@ import * as actionTypes from '../actions/actionTypes';
 import * as guitars from '../../json/guitar.json';
 
 import {generateNoteQuestion} from '../../services/guitarQuest';
-const guitarStage = {
-    
-}
+
+const guitarStage = [
+    null,
+    'selectNote',
+]
 
 const initialState = {
     guitarType: 'standartGuitar',
     guitarConfig: guitars['standartGuitar'],
     
     trainingStart: false,
-    stage:null,
+    stage: guitarStage[0],
     questionNote:false,
 }
 
@@ -23,12 +25,14 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 trainingStart: true,
+                stage:guitarStage[1],
                 questionNote:generateNoteQuestion(state.guitarConfig,state.questionNote)
             };
         case actionTypes.END_TRAIN:
             return {
                 ...state,
                 trainingStart: false,
+                stage:guitarStage[0],
             };
 
 
