@@ -24,9 +24,13 @@ class Fingerboard extends Component {
         if (nextProps.questionNote !== this.props.questionNote){
             this.askQuestionNote(nextProps.questionNote)
         }
+        if(nextProps.userAnswer){
+            this.showAnswerToUserSTART(nextProps.userAnswer)
+        }
     }
 
-    askQuestionNote = (questionNote) => {
+    askQuestionNote = questionNote => {
+        // eslint-disable-next-line
         const {fretNumber,noteNumber,noteName} = questionNote;
 
         const guitarNeck = this.guitarNackRef.current;
@@ -42,7 +46,7 @@ class Fingerboard extends Component {
         }
     }
 
-    moveArrowToQuestionNote = (questionNoteDom) => {
+    moveArrowToQuestionNote = questionNoteDom => {
         const arrow = this.arrowRef.current;
         const guitarNeck = this.guitarNackRef.current;
 
@@ -57,9 +61,14 @@ class Fingerboard extends Component {
 
         arrow.style.left = questionNotePos.left + questionNoteDom.offsetWidth/2 +'px';
         arrow.style.top = questionNotePos.top+'px';
+    }
 
-        console.log("questionNotePos ", questionNotePos);
+    showAnswerToUserSTART = userAnswer => {
+        const { userAnswerCorrect, userAnswerNote, correctUnswerNote:{noteName,fretNumber,noteNumber} } = userAnswer;
 
+        const questionNoteDom = this.guitarNackRef.current.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
+
+        questionNoteDom.classList.add(userAnswerCorrect ? 'answer-correct' : 'answer-wrong')
     }
 
     renderGuitar() {
@@ -125,7 +134,10 @@ class Fingerboard extends Component {
         )
     }
 
+
+
     render() {
+        // eslint-disable-next-line
         const {trainingStart,questionNote} = this.props;
         return (
             <div style={{position:'relative'}} className="guitar">
@@ -147,6 +159,7 @@ const mapStateToProps = state => {
     return {
         trainingStart:state.guitar.trainingStart,
         questionNote:state.guitar.questionNote,
+        userAnswer:state.guitar.userAnswer,
     }
 }
 

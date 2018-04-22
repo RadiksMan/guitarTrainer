@@ -1,3 +1,6 @@
 //Guitar
 export const START_TRAIN = 'START_TRAIN';
 export const END_TRAIN = 'END_TRAIN';
+
+export const USER_SELECTED_NOTE_START = 'USER_SELECTED_NOTE_START';
+export const USER_SELECTED_NOTE_END = 'USER_SELECTED_NOTE_END';

@@ -10,3 +10,9 @@ export const trainEnd = () => {
         type: actionTypes.END_TRAIN
     };
 };
+export const userSelectedNote = userAnswerNote => {
+    return {
+        type: actionTypes.USER_SELECTED_NOTE_START,
+        payload: {userAnswerNote}
+    }
+}
