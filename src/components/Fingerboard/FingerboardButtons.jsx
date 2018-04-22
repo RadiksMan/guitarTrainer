@@ -79,7 +79,7 @@ class FingerboardButtons extends PureComponent {
         <ul className="notes-list" ref={this.buttonHolder}>
           {this.notes.map((note, i) => (
             <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
-              {note.toUpperCase()}
+              <span>{note.toUpperCase()}</span>
             </li>
           ))}
         </ul>

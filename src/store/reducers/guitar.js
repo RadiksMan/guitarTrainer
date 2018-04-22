@@ -52,7 +52,12 @@ export default (state = initialState, action) => {
     case actionTypes.USER_SELECTED_NOTE_END:
       return {
           ...state,
-          stage:guitarStage[3],
+          stage:guitarStage[1],
+          userAnswer: false,
+          questionNote: generateNoteQuestion(
+            state.guitarConfig,
+            state.questionNote
+          )
       };
     default:
       return state;

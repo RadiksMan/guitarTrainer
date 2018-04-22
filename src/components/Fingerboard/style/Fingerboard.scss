@@ -238,7 +238,7 @@
 	visibility: hidden;
 	margin-top: -3px;
 	padding-top: 1px;
-	transition: opacity ease .3s,visibility ease .3s;
+	transition: opacity ease .0s,visibility ease .0s;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -251,6 +251,7 @@
 	&.question{
 		opacity: 0.7;
 		visibility: visible;
+		transition-duration:0.3s;
 		&:after{opacity: 1;visibility: visible;}
 	}
 	&.answer-correct{
@@ -296,8 +297,8 @@
 }
 
 
-.arrow{position: absolute;left:49%;top:49%;z-index: 2;transition:all ease .3s;opacity:0;visibility:hidden;pointer-events:none;width: 1px;height: 1px;margin-left: -1px;
-	&.active{opacity:1;visibility: visible;pointer-events:all;
+.arrow{position: absolute;left:49%;top:49%;z-index: 2;transition:all ease 0s;opacity:0;visibility:hidden;pointer-events:none;width: 1px;height: 1px;margin-left: -1px;
+	&.active{opacity:1;visibility: visible;pointer-events:all;transition-duration:0.3s;
 		.arrowBody{animation-play-state: running;}
 	}
 	.arrowBody{animation: bounce 1.5s infinite;animation-play-state: paused;

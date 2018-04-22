@@ -21,6 +21,9 @@ class Fingerboard extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
+        if(nextProps.trainingStart === false && this.props.trainingStart === true){
+            this.trainEnd();
+        }
         if (nextProps.questionNote !== this.props.questionNote){
             this.askQuestionNote(nextProps.questionNote)
         }
@@ -44,6 +47,16 @@ class Fingerboard extends Component {
         }else {
             throw new Error('Error in askQuestionNote() - miss the question Note!');
         }
+    }
+
+    trainEnd = () => {
+        //train end - clear guitar neck
+        const allNotes = this.guitarNackRef.current.querySelectorAll(`.note`);
+        const arrow = this.arrowRef.current;
+
+        allNotes.forEach(item=>item.classList.remove('question','answer-correct','answer-wrong'));
+        arrow.classList.remove('active');
+        arrow.removeAttribute('style');
     }
 
     moveArrowToQuestionNote = questionNoteDom => {
