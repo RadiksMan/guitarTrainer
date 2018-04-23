@@ -9,8 +9,8 @@ import {
 const guitarStage = [
   null, //0 - init state
   "showQuestion", //1 - user start the train and sees question icon on guitar neck
-  "selectNoteAndShowAnswer", //2 - user select answer note and see correct/uncorrect "answer"
-  "showAnswerEnd" //3 - user stops seeing correct/uncorrect "answer"
+  "showAnswer", //2 - user select answer note and see correct/uncorrect "answer"
+  //"showAnswerEnd" //3 - user stops seeing correct/uncorrect "answer"
 ];
 
 const initialState = {
@@ -50,6 +50,10 @@ export default (state = initialState, action) => {
         userAnswer: verifyCorrectUserAnswer(userAnswerNote, state.questionNote)
       };
     case actionTypes.USER_SELECTED_NOTE_END:
+      if(!state.trainingStart){
+        return {...state}
+      }  
+
       return {
           ...state,
           stage:guitarStage[1],

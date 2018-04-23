@@ -9,7 +9,6 @@ import {
 } from "../../store/actions/guitar";
 
 class FingerboardButtons extends PureComponent {
-
   buttonHolder = React.createRef();
   notes = ["a", "a#", "b", "c", "c#", "d", "d#", "e", "f", "f#", "g", "g#"];
   keycodeNotes = [49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187];
@@ -23,8 +22,18 @@ class FingerboardButtons extends PureComponent {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.userAnswer) {
-      this.showAnswerToUserSTART(nextProps.userAnswer);
+    switch (nextProps.stage) {
+      case "showQuestion":
+        if (this.props.stage === "showAnswer") {
+          //show-answer-end stage
+          this.answerToUserClear();
+        }
+        break;
+      case "showAnswer":
+        if (nextProps.userAnswer) {
+          this.showAnswerToUser(nextProps.userAnswer);
+        }
+        break;
     }
   }
 
@@ -52,25 +61,36 @@ class FingerboardButtons extends PureComponent {
     !trainingStart ? trainStart() : trainEnd();
   };
 
-  showAnswerToUserSTART = userAnswer => {
-    const { userAnswerCorrect, userAnswerNote, correctUnswerNote:{noteName} } = userAnswer;
+  showAnswerToUser = userAnswer => {
+    const {
+      userAnswerCorrect,
+      userAnswerNote,
+      correctUnswerNote: { noteName }
+    } = userAnswer;
 
-    const selectedNoteDom = this.buttonHolder.current.querySelector(`li[data-note="${userAnswerNote.toLowerCase()}"]`)
-    
-    if(userAnswerCorrect){
-        selectedNoteDom.classList.add('answer-correct');
-    }else {
-        selectedNoteDom.classList.add('answer-wrong');
-        
-        const correctNoteDom = this.buttonHolder.current.querySelector(`li[data-note="${noteName.toLowerCase()}"]`);
-        correctNoteDom.classList.add('answer-correct');
+    const selectedNoteDom = this.buttonHolder.current.querySelector(
+      `li[data-note="${userAnswerNote.toLowerCase()}"]`);
+
+    if (userAnswerCorrect) {
+      selectedNoteDom.classList.add("answer-correct");
+    } else {
+      selectedNoteDom.classList.add("answer-wrong");
+
+      const correctNoteDom = this.buttonHolder.current.querySelector(
+        `li[data-note="${noteName.toLowerCase()}"]`
+      );
+      correctNoteDom.classList.add("answer-correct");
     }
   };
 
-  render() {
-    // eslint-disable-next-line
-    const { trainingStart, questionNote } = this.props;
+  answerToUserClear = () => {
+    const buttonsAll = this.buttonHolder.current.querySelectorAll('li');
+    buttonsAll.forEach(item=>item.classList.remove('answer-correct','answer-wrong'));
+  }
 
+
+  render() {
+    const { trainingStart } = this.props;
     return (
       <div className="FingerboardButtons">
         <div className="start-button" onClick={this.buttonStartPressed}>

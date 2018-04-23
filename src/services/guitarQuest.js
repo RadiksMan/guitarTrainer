@@ -32,7 +32,7 @@ export const verifyCorrectUserAnswer = (userAnswerNote, questionNote) => {
     const {noteName} = questionNote;
 
     return {
-        userAnswerCorrect:noteName === userAnswerNote ? true : false,
+        userAnswerCorrect: noteName === userAnswerNote ? true : false,
         userAnswerNote,
         correctUnswerNote:questionNote
     }

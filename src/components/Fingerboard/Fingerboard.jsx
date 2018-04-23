@@ -9,12 +9,10 @@ const GUITAR_TYPE = 'standartGuitar';
 
 class Fingerboard extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.arrowRef = React.createRef();
-        this.guitarNackRef = React.createRef();
-    }
+    arrowRef = React.createRef();
+    guitarNackRef = React.createRef();
+    questionNoteDom = null;
+    
     
     state = {
         guitarType: GUITAR_TYPE,
@@ -24,28 +22,45 @@ class Fingerboard extends Component {
         if(nextProps.trainingStart === false && this.props.trainingStart === true){
             this.trainEnd();
         }
-        if (nextProps.questionNote !== this.props.questionNote){
-            this.askQuestionNote(nextProps.questionNote)
-        }
-        if(nextProps.userAnswer){
-            this.showAnswerToUserSTART(nextProps.userAnswer)
+       
+        switch(nextProps.stage){
+            case 'showQuestion':
+                    if(this.props.stage === 'showAnswer'){
+                        //show-answer-end stage
+                        this.questionNoteClear();
+                    }
+                    if (nextProps.questionNote !== this.props.questionNote){
+                        this.askQuestionNote(nextProps.questionNote)
+                    }
+
+                break;
+            case 'showAnswer':
+                if(nextProps.userAnswer){
+                    this.showAnswerToUserSTART(nextProps.userAnswer)
+                }
+                break;
         }
     }
 
     askQuestionNote = questionNote => {
-        // eslint-disable-next-line
-        const {fretNumber,noteNumber,noteName} = questionNote;
+        const {fretNumber,noteNumber} = questionNote;
 
         const guitarNeck = this.guitarNackRef.current;
-        const questionNoteDom = guitarNeck.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
+        this.questionNoteDom = guitarNeck.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
 
-        if(questionNoteDom){
+        if(this.questionNoteDom){
             //show note 
-            questionNoteDom.classList.add('question');
-            this.moveArrowToQuestionNote(questionNoteDom)
+            this.questionNoteDom.classList.add('question');
+            this.moveArrowToQuestionNote(this.questionNoteDom)
 
         }else {
             throw new Error('Error in askQuestionNote() - miss the question Note!');
+        }
+    }
+
+    questionNoteClear = () => {
+        if(this.questionNoteDom){
+            this.questionNoteDom.classList.remove('question','answer-correct','answer-wrong')
         }
     }
 
@@ -173,6 +188,7 @@ const mapStateToProps = state => {
         trainingStart:state.guitar.trainingStart,
         questionNote:state.guitar.questionNote,
         userAnswer:state.guitar.userAnswer,
+        stage:state.guitar.stage,
     }
 }
 
