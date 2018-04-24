@@ -69,7 +69,8 @@ class FingerboardButtons extends PureComponent {
     } = userAnswer;
 
     const selectedNoteDom = this.buttonHolder.current.querySelector(
-      `li[data-note="${userAnswerNote.toLowerCase()}"]`);
+      `li[data-note="${userAnswerNote.toLowerCase()}"]`
+    );
 
     if (userAnswerCorrect) {
       selectedNoteDom.classList.add("answer-correct");
@@ -84,10 +85,11 @@ class FingerboardButtons extends PureComponent {
   };
 
   answerToUserClear = () => {
-    const buttonsAll = this.buttonHolder.current.querySelectorAll('li');
-    buttonsAll.forEach(item=>item.classList.remove('answer-correct','answer-wrong'));
-  }
-
+    const buttonsAll = this.buttonHolder.current.querySelectorAll("li");
+    buttonsAll.forEach(item =>
+      item.classList.remove("answer-correct", "answer-wrong")
+    );
+  };
 
   render() {
     const { trainingStart } = this.props;

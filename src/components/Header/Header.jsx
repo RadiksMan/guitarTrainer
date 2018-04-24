@@ -34,6 +34,11 @@ class Header extends Component {
         return(
             <div>
                 test HEADER
+
+
+                <button>
+                    <span>Показать все ноты на грифе</span>
+                </button>
             </div>    
         )
     }

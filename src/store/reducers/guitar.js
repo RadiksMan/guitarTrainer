@@ -20,7 +20,8 @@ const initialState = {
   trainingStart: false,
   stage: guitarStage[0],
   questionNote: false,
-  userAnswer: false
+  userAnswer: false,
+  showAllNotes:false,
 };
 
 export default (state = initialState, action) => {
@@ -39,6 +40,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         trainingStart: false,
+        showAllNotes:false,
         stage: guitarStage[0],
         userAnswer: false
       };
@@ -53,7 +55,6 @@ export default (state = initialState, action) => {
       if(!state.trainingStart){
         return {...state}
       }  
-
       return {
           ...state,
           stage:guitarStage[1],
@@ -63,6 +64,14 @@ export default (state = initialState, action) => {
             state.questionNote
           )
       };
+    case actionTypes.SEE_ALL_NOTES_ON_NECK:
+      return {
+        ...state,
+        showAllNotes:!state.showAllNotes,
+        stage: guitarStage[0],
+        userAnswer: false,
+        trainingStart: false,//?
+      }
     default:
       return state;
   }

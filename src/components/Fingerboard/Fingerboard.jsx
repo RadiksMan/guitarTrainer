@@ -13,32 +13,32 @@ class Fingerboard extends Component {
     guitarNackRef = React.createRef();
     questionNoteDom = null;
     
-    
     state = {
         guitarType: GUITAR_TYPE,
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
-        if(nextProps.trainingStart === false && this.props.trainingStart === true){
-            this.trainEnd();
-        }
-       
+        
         switch(nextProps.stage){
             case 'showQuestion':
-                    if(this.props.stage === 'showAnswer'){
-                        //show-answer-end stage
-                        this.questionNoteClear();
-                    }
-                    if (nextProps.questionNote !== this.props.questionNote){
-                        this.askQuestionNote(nextProps.questionNote)
-                    }
-
+                if(this.props.stage === 'showAnswer'){
+                    //show-answer-end stage
+                    this.questionNoteClear();
+                }
+                if (nextProps.questionNote !== this.props.questionNote){
+                    this.askQuestionNote(nextProps.questionNote)
+                }
                 break;
             case 'showAnswer':
                 if(nextProps.userAnswer){
                     this.showAnswerToUserSTART(nextProps.userAnswer)
                 }
                 break;
+            case null:
+                if(nextProps.trainingStart === false && this.props.trainingStart === true){
+                    this.trainEnd();
+                }
+                break
         }
     }
 

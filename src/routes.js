@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router,Switch} from 'react-router-dom';
 
 import App from './components/App';
 import NoMatch from './containers/error-404';
-import Header from './components/header';
+import Header from './components/Header/Header';
 
 const Routes = () => (
     <Router>
