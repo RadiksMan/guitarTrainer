@@ -7,7 +7,16 @@
     margin-top: 3px;
     overflow: hidden;
     border: 2px solid black;
-    z-index: 0;
+	z-index: 0;
+
+	&.show-all-notes{
+		.note{
+			opacity: 0.7;
+			visibility: visible;
+			transition-duration:0.3s;
+			span{opacity: 1;visibility: visible;}
+		}
+	}
 }
 
 .fret{

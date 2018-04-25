@@ -34,7 +34,8 @@ export default (state = initialState, action) => {
         questionNote: generateNoteQuestion(
           state.guitarConfig,
           state.questionNote
-        )
+        ),
+        showAllNotes:false,
       };
     case actionTypes.END_TRAIN:
       return {

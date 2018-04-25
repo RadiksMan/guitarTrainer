@@ -5,7 +5,8 @@ import "./style/FingerboardButtons.css";
 import {
   trainStart,
   trainEnd,
-  userSelectedNote
+  userSelectedNote,
+  toggleShowAllNotes
 } from "../../store/actions/guitar";
 
 class FingerboardButtons extends PureComponent {
@@ -34,6 +35,10 @@ class FingerboardButtons extends PureComponent {
           this.showAnswerToUser(nextProps.userAnswer);
         }
         break;
+      case null:
+        if(!nextProps.showAllNotes){
+          this.answerToUserClear();
+        }
     }
   }
 
@@ -46,6 +51,10 @@ class FingerboardButtons extends PureComponent {
     if (keyCode === 32) {
       //pressed space - toggle training
       this.buttonStartPressed();
+    }
+    if (keyCode === 8) {
+      //pressed backspace - taggle show all notes
+      this.props.toggleShowAllNotes();
     }
   };
 
@@ -122,5 +131,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   trainStart,
   trainEnd,
-  userSelectedNote
+  userSelectedNote,
+  toggleShowAllNotes
 })(FingerboardButtons);

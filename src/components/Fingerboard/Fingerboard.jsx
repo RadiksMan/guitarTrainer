@@ -28,6 +28,9 @@ class Fingerboard extends Component {
                 if (nextProps.questionNote !== this.props.questionNote){
                     this.askQuestionNote(nextProps.questionNote)
                 }
+                if(this.props.showAllNotes){
+                    this.toggleShowAllNotes(true);
+                }
                 break;
             case 'showAnswer':
                 if(nextProps.userAnswer){
@@ -37,6 +40,9 @@ class Fingerboard extends Component {
             case null:
                 if(nextProps.trainingStart === false && this.props.trainingStart === true){
                     this.trainEnd();
+                }
+                if(nextProps.showAllNotes !== this.props.showAllNotes){
+                    this.toggleShowAllNotes();
                 }
                 break
         }
@@ -72,6 +78,11 @@ class Fingerboard extends Component {
         allNotes.forEach(item=>item.classList.remove('question','answer-correct','answer-wrong'));
         arrow.classList.remove('active');
         arrow.removeAttribute('style');
+    }
+
+    toggleShowAllNotes = (hide = false) => {
+        const guitarNeck = this.guitarNackRef.current;
+        guitarNeck.classList.toggle('show-all-notes')
     }
 
     moveArrowToQuestionNote = questionNoteDom => {
@@ -162,8 +173,6 @@ class Fingerboard extends Component {
         )
     }
 
-
-
     render() {
         // eslint-disable-next-line
         const {trainingStart,questionNote} = this.props;
@@ -189,6 +198,7 @@ const mapStateToProps = state => {
         questionNote:state.guitar.questionNote,
         userAnswer:state.guitar.userAnswer,
         stage:state.guitar.stage,
+        showAllNotes:state.guitar.showAllNotes,
     }
 }
 

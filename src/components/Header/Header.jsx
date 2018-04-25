@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import shortid  from 'shortid';
+
+import {toggleShowAllNotes} from '../../store/actions/guitar';
 
 class Header extends Component {
 
-    constructor(){
-        super();
-        this.state = {
-            userID:null
-        }
+    state = {
+        userID:null
     }
-
+    
     componentDidMount() {
         this.declareUserID('user-id')
     }
@@ -36,7 +34,9 @@ class Header extends Component {
                 test HEADER
 
 
-                <button>
+                <button
+                    onClick={this.props.toggleShowAllNotes}
+                >
                     <span>Показать все ноты на грифе</span>
                 </button>
             </div>    
@@ -44,4 +44,4 @@ class Header extends Component {
     }
 }
 
-export default connect(null,null)(Header);
+export default connect(null,{toggleShowAllNotes})(Header);

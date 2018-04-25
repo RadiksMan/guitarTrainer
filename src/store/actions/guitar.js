@@ -27,3 +27,8 @@ export const userSelectedNote = userAnswerNote => {
         }, ANSWER_TIMING);
     }
 }
+export const toggleShowAllNotes = () => {
+    return {
+        type: actionTypes.SEE_ALL_NOTES_ON_NECK
+    };
+};
