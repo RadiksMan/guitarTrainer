@@ -7,11 +7,11 @@ import NoMatch from './containers/error-404';
 import Header from './components/Header/Header';
 
 const Routes = () => (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
         <div>
             <Header/>
             <Switch>
-                    <Route exact path="/" component={App}/>
+                    <Route exact path='/' component={App}/>
 
                     <Route component={NoMatch}/>
             </Switch>
