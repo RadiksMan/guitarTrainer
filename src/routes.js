@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 
 const Routes = () => (
     <Router basename={process.env.PUBLIC_URL}>
-        <div>
+        <div className="App">
             <Header/>
             <Switch>
                     <Route exact path='/' component={App}/>

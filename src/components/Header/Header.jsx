@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import shortid  from 'shortid';
 
 import {toggleShowAllNotes} from '../../store/actions/guitar';
+import './style/Header.css';
 
 class Header extends Component {
 
     state = {
         userID:null
     }
-    
+
     componentDidMount() {
         this.declareUserID('user-id')
     }
@@ -30,7 +31,7 @@ class Header extends Component {
 
     render() {
         return(
-            <div>
+            <div className="Header">
                 test HEADER
 
 
@@ -39,7 +40,7 @@ class Header extends Component {
                 >
                     <span>Показать все ноты на грифе</span>
                 </button>
-            </div>    
+            </div>
         )
     }
 }

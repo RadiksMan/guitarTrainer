@@ -12,13 +12,13 @@ class Fingerboard extends Component {
     arrowRef = React.createRef();
     guitarNackRef = React.createRef();
     questionNoteDom = null;
-    
+
     state = {
         guitarType: GUITAR_TYPE,
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
-        
+
         switch(nextProps.stage){
             case 'showQuestion':
                 if(this.props.stage === 'showAnswer'){
@@ -55,7 +55,7 @@ class Fingerboard extends Component {
         this.questionNoteDom = guitarNeck.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
 
         if(this.questionNoteDom){
-            //show note 
+            //show note
             this.questionNoteDom.classList.add('question');
             this.moveArrowToQuestionNote(this.questionNoteDom)
 
@@ -115,7 +115,7 @@ class Fingerboard extends Component {
         const dotsOne = [5, 7, 9, 15, 17];
         const dotsTwo = [12];
         return (
-            <div 
+            <div
                 className={guitarNeck}
                 ref={this.guitarNackRef}
             >
@@ -124,7 +124,7 @@ class Fingerboard extends Component {
 
                         const classFretName = `fret f${index}`;
                         var notesForEach = [];
-                        
+
                         Object.keys(fret).forEach((key) => {
 
                             const {note} = fret[key];
@@ -138,9 +138,9 @@ class Fingerboard extends Component {
                         })
 
                         return (
-                            <div 
-                                className={classFretName} 
-                                key={index} 
+                            <div
+                                className={classFretName}
+                                key={index}
                             >
                                 {notesForEach}
                             </div>
@@ -177,11 +177,11 @@ class Fingerboard extends Component {
         // eslint-disable-next-line
         const {trainingStart,questionNote} = this.props;
         return (
-            <div style={{position:'relative'}} className="guitar">
+            <div className="Fingerboard">
 
-                <div 
+                <div
                     className="arrow"
-                    ref={this.arrowRef} 
+                    ref={this.arrowRef}
                 >
                     <div className="arrowBody"></div>
                 </div>

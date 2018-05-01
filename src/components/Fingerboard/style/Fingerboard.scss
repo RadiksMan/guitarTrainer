@@ -1,3 +1,5 @@
+.Fingerboard{position: relative;flex:0.3;min-height: 200px;display: flex;align-items: center;}
+
 .guitar-neck{
     position: relative;
     width: 100%;
@@ -138,7 +140,7 @@
 .f0 {
     right: 96.8%;
 	border-right: 0.8ex white solid;
-	
+
 	.note {
 		margin-left: -0.4ex;
 	}
