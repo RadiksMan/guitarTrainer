@@ -104,9 +104,6 @@ class FingerboardButtons extends PureComponent {
     const { trainingStart } = this.props;
     return (
       <div className="FingerboardButtons">
-        <div className="start-button" onClick={this.buttonStartPressed}>
-          {!trainingStart ? "START" : "END"}
-        </div>
         <ul className="notes-list" ref={this.buttonHolder}>
           {this.notes.map((note, i) => (
             <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
@@ -114,6 +111,14 @@ class FingerboardButtons extends PureComponent {
             </li>
           ))}
         </ul>
+        <div className="btn" onClick={this.buttonStartPressed}>
+          <svg>
+            <rect x="0" y="0" fill="none" width="100%" height="100%" />
+          </svg>
+          <span>
+            {!trainingStart ? "START" : "END"}
+          </span>
+        </div>
       </div>
     );
   }

@@ -1,3 +1,4 @@
+$primary:#ffb941;
 
 html {
   box-sizing: border-box;
@@ -16,6 +17,7 @@ body {
   font-family: 'Fira Sans', sans-serif;
   color: black;
   height: 100%;
+  background-color: $primary;
 }
 
 img,
@@ -26,5 +28,65 @@ audio {
 }
 
 #root{height: 100%;width: 100%;display: flex;}
-.App{display: flex;flex:1;flex-direction: column;}
-.main{display: flex;flex:1;flex-direction: column;}
+.App,.main{display: flex;flex:1;flex-direction: column;}
+
+// buttons
+.btn{
+  color: #fff;
+  cursor: pointer;
+  font-size:16px;
+  font-weight: 400;
+  line-height: 50px;
+  margin: 0 0 2em;
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  background: darken($primary, 1.5%);
+  font-weight: 100;
+  transition:all ease .3s;
+  &.btn-wide{
+    max-width: 200px;
+    font-size:15px;
+  }
+
+  svg {
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  rect {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-dasharray: 422, 0;
+    transition-delay: none;
+  }
+  span{
+    transition:all ease .3s;
+    position: relative;
+  }
+
+  &:hover{
+    background: rgba($primary, 0);
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    rect {
+      stroke-width: 5;
+      stroke-dasharray: 19, 310;
+      stroke-dashoffset: 48;
+      transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    &.btn-wide{
+      rect{stroke-dasharray: 40, 340;}
+    }
+  }
+  &:active{
+    span{top:2px;}
+  }
+}

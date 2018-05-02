@@ -178,15 +178,16 @@ class Fingerboard extends Component {
         const {trainingStart,questionNote} = this.props;
         return (
             <div className="Fingerboard">
+                <div className="fingerboard-wrapper">
+                    <div
+                        className="arrow"
+                        ref={this.arrowRef}
+                    >
+                        <div className="arrowBody"></div>
+                    </div>
 
-                <div
-                    className="arrow"
-                    ref={this.arrowRef}
-                >
-                    <div className="arrowBody"></div>
+                    {this.renderGuitar()}
                 </div>
-
-                {this.renderGuitar()}
             </div>
         )
     }

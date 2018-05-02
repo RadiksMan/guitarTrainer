@@ -34,12 +34,14 @@ class Header extends Component {
             <div className="Header">
                 test HEADER
 
-
-                <button
-                    onClick={this.props.toggleShowAllNotes}
-                >
-                    <span>Показать все ноты на грифе</span>
-                </button>
+                <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
+                    <svg>
+                        <rect x="0" y="0" fill="none" width="100%" height="100%" />
+                    </svg>
+                    <span>
+                        <span>Показать все ноты</span>
+                    </span>
+                </div>
             </div>
         )
     }
