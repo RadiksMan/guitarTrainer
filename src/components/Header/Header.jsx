@@ -32,15 +32,21 @@ class Header extends Component {
     render() {
         return(
             <div className="Header">
-                test HEADER
+                <div className="logo">
+                    test HEADER
+                </div>
 
-                <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
-                    <svg>
-                        <rect x="0" y="0" fill="none" width="100%" height="100%" />
-                    </svg>
-                    <span>
-                        <span>Показать все ноты</span>
-                    </span>
+
+                <div className="controls">
+                    <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
+                        <svg>
+                            <rect x="0" y="0" fill="none" width="100%" height="100%" />
+                        </svg>
+                        <span>
+                            <span>Показать все ноты</span>
+                        </span>
+                        <i className="keyboardKey">backspace</i>
+                    </div>
                 </div>
             </div>
         )

@@ -1,1 +1,4 @@
-.Header{height: 50px;}
+.Header{display: flex;align-items: center;justify-content: space-between;padding: 1em 2em;}
+.controls{flex:0.7;display: flex;align-items: center;justify-content: flex-end;
+    .btn{margin-bottom: 0;}
+}

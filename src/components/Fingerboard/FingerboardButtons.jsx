@@ -13,6 +13,7 @@ class FingerboardButtons extends PureComponent {
   buttonHolder = React.createRef();
   notes = ["a", "a#", "b", "c", "c#", "d", "d#", "e", "f", "f#", "g", "g#"];
   keycodeNotes = [49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187];
+  keyboardNotes = ['1','2','3','4','5','6','7','8','9','0','-','='];
 
   componentWillMount() {
     document.addEventListener("keydown", this.hendleKeyDown, false);
@@ -108,6 +109,7 @@ class FingerboardButtons extends PureComponent {
           {this.notes.map((note, i) => (
             <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
               <span>{note.toUpperCase()}</span>
+              <i className="keyboardKey">{this.keyboardNotes[i]}</i>
             </li>
           ))}
         </ul>
@@ -118,6 +120,7 @@ class FingerboardButtons extends PureComponent {
           <span>
             {!trainingStart ? "START" : "END"}
           </span>
+          <i className="keyboardKey">space</i>
         </div>
       </div>
     );
