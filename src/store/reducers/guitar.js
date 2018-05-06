@@ -10,11 +10,17 @@ const guitarStage = [
   null, //0 - init state
   "showQuestion", //1 - user start the train and sees question icon on guitar neck
   "showAnswer", //2 - user select answer note and see correct/uncorrect "answer"
-  //"showAnswerEnd" //3 - user stops seeing correct/uncorrect "answer"
 ];
 
+const guitarType = [
+  'standartGuitar',
+  'bassGuitar',
+  'ukuleleGuitar'
+]
+
 const initialState = {
-  guitarType: "standartGuitar",
+  guitarType: guitarType[0],
+  guitarTypeList: guitarType,
   guitarConfig: guitars["standartGuitar"],
 
   trainingStart: false,
@@ -55,7 +61,7 @@ export default (state = initialState, action) => {
     case actionTypes.USER_SELECTED_NOTE_END:
       if(!state.trainingStart){
         return {...state}
-      }  
+      }
       return {
           ...state,
           stage:guitarStage[1],
@@ -73,6 +79,16 @@ export default (state = initialState, action) => {
         userAnswer: false,
         trainingStart: false,//?
       }
+    case actionTypes.CHANGE_GUITAR_TYPE:
+      return {
+        ...state,
+        stage: guitarStage[0],
+        userAnswer: false,
+        trainingStart: false,
+        guitarType: action.payload.guitarType,
+        guitarConfig: guitars[action.payload.guitarType]
+      }
+
     default:
       return state;
   }

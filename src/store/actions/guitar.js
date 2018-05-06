@@ -32,3 +32,9 @@ export const toggleShowAllNotes = () => {
         type: actionTypes.SEE_ALL_NOTES_ON_NECK
     };
 };
+export const changeGuitarType = guitarType => {
+    return {
+        type: actionTypes.CHANGE_GUITAR_TYPE,
+        payload: { guitarType }
+    }
+}

@@ -5,8 +5,6 @@ import {getOffset} from '../../services/utility';
 import guitarConfig from '../../json/guitar.json';
 import './style/Fingerboard.css';
 
-const GUITAR_TYPE = 'standartGuitar';
-
 class Fingerboard extends Component {
 
     arrowRef = React.createRef();
@@ -14,7 +12,8 @@ class Fingerboard extends Component {
     questionNoteDom = null;
 
     state = {
-        guitarType: GUITAR_TYPE,
+        guitarType: this.props.guitarType,
+        guitarTypeModule: null
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -43,6 +42,9 @@ class Fingerboard extends Component {
                 }
                 if(nextProps.showAllNotes !== this.props.showAllNotes){
                     this.toggleShowAllNotes();
+                }
+                if (nextProps.guitarType !== this.props.guitarType) {
+                    this.updateGuitarType(nextProps.guitarType );
                 }
                 break
         }
@@ -81,7 +83,9 @@ class Fingerboard extends Component {
     }
 
     toggleShowAllNotes = (hide = false) => {
+        // TODO - ref to parent !!!!!!
         const guitarNeck = this.guitarNackRef.current;
+        console.log('guitarNeck', guitarNeck)
         guitarNeck.classList.toggle('show-all-notes')
     }
 
@@ -110,64 +114,29 @@ class Fingerboard extends Component {
         questionNoteDom.classList.add(userAnswerCorrect ? 'answer-correct' : 'answer-wrong')
     }
 
+    updateGuitarType = guitarType => {
+
+        import(`./guitarTypes/${guitarType}`).then(module => {
+            this.setState({
+                guitarTypeModule: module.default,
+                guitarType
+            })
+        })
+
+    }
+
     renderGuitar() {
-        const { strings, guitarNeck, frets } = guitarConfig[this.state.guitarType];
-        const dotsOne = [5, 7, 9, 15, 17];
-        const dotsTwo = [12];
+
+        const { guitarTypeModule: GuitarMarkupComponent } = this.state;
         return (
             <div
-                className={guitarNeck}
                 ref={this.guitarNackRef}
             >
-                {
-                    frets.map((fret, index) => {
-
-                        const classFretName = `fret f${index}`;
-                        var notesForEach = [];
-
-                        Object.keys(fret).forEach((key) => {
-
-                            const {note} = fret[key];
-                            const classNotesName = `note n${key} ${note.toLowerCase()}`;
-
-                            notesForEach.push(
-                                <div key={key} className={classNotesName}>
-                                    <span>{note}</span>
-                                </div>
-                            );
-                        })
-
-                        return (
-                            <div
-                                className={classFretName}
-                                key={index}
-                            >
-                                {notesForEach}
-                            </div>
-                        )
-                    })
-                }
-
-
-                {
-                    frets.map((_, index) => {
-
-                        const dot = dotsOne.includes(index) ? 'dot' : dotsTwo.includes(index) ? 'two-dots' : '';
-
-                        return (
-                            <div className={`fret-line f${index} ${dot}`} key={index}/>
-                        )
-                    })
-                }
-
-
-                {
-                    strings.map((_, index) => {
-                        const bass = index > 2 ? 'bass' : '';
-                        const classBassAdd = `string s${index + 1} ${bass}`;
-
-                        return <div className={classBassAdd} key={index} />
-                    })
+                {GuitarMarkupComponent &&
+                    <GuitarMarkupComponent
+                        test="1"
+                        {...guitarConfig[this.state.guitarType]}
+                    />
                 }
             </div>
         )
@@ -176,6 +145,8 @@ class Fingerboard extends Component {
     render() {
         // eslint-disable-next-line
         const {trainingStart,questionNote} = this.props;
+        const { guitarTypeModule: GuitarMarkupComponent } = this.state;
+
         return (
             <div className="Fingerboard">
                 <div className="fingerboard-wrapper">
@@ -186,7 +157,16 @@ class Fingerboard extends Component {
                         <div className="arrowBody"></div>
                     </div>
 
-                    {this.renderGuitar()}
+                    <div
+                        ref={this.guitarNackRef}
+                    >
+                        {GuitarMarkupComponent &&
+                            <GuitarMarkupComponent
+                                test="1"
+                                {...guitarConfig[this.state.guitarType]}
+                            />
+                        }
+                    </div>
                 </div>
             </div>
         )
@@ -200,6 +180,7 @@ const mapStateToProps = state => {
         userAnswer:state.guitar.userAnswer,
         stage:state.guitar.stage,
         showAllNotes:state.guitar.showAllNotes,
+        guitarType: state.guitar.guitarType,
     }
 }
 
