@@ -36,13 +36,14 @@
                 color:white;
                 border-color:#00a811;
                 background: #00a811;
+                transform: translateY(-8px) perspective(1px);
             }
             &.answer-wrong{
                 color:white;
                 border-color:#ff0000;
                 background: #ff0000;
             }
-            &.selected{transform: translateY(-8px) perspective(1px);}
+            &.selected{}
 
         span{user-select: none;-webkit-font-smoothing: antialiased;}
     }

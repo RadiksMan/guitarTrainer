@@ -3,37 +3,20 @@ import { connect } from 'react-redux';
 import shortid  from 'shortid';
 
 import {toggleShowAllNotes} from '../../store/actions/guitar';
+import { userInitLoad} from '../../store/actions/user';
 import './style/Header.css';
 
 class Header extends Component {
 
-    state = {
-        userID:null
-    }
-
-    componentDidMount() {
-        this.declareUserID('user-id')
-    }
-
-    declareUserID(name){
-        let id;
-
-        if( localStorage.getItem(name) ){
-            id = localStorage.getItem(name);
-        } else {
-            id = shortid.generate();
-            localStorage.setItem(name,id);
-        }
-        //console.log('User initialise id ->', id)
-        this.setState({userID:id});
-
+    componentWillMount(){
+        this.props.userInitLoad();
     }
 
     render() {
         return(
             <div className="Header">
                 <div className="logo">
-                    test HEADER
+                    HEADER LOGO
                 </div>
 
 
@@ -53,4 +36,6 @@ class Header extends Component {
     }
 }
 
-export default connect(null,{toggleShowAllNotes})(Header);
+
+
+export default connect(null, { toggleShowAllNotes, userInitLoad})(Header);
