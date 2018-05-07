@@ -16,6 +16,15 @@ class Fingerboard extends Component {
         guitarTypeModule: null
     }
 
+    componentWillMount(){
+        this.updateGuitarType(this.state.guitarType)
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (nextState.guitarType === this.state.guitarType) return false;
+    //     return true;
+    // }
+
     UNSAFE_componentWillReceiveProps(nextProps){
 
         switch(nextProps.stage){
@@ -86,7 +95,7 @@ class Fingerboard extends Component {
         // TODO - ref to parent !!!!!!
         const guitarNeck = this.guitarNackRef.current;
         console.log('guitarNeck', guitarNeck)
-        guitarNeck.classList.toggle('show-all-notes')
+        guitarNeck.firstChild.classList.toggle('show-all-notes')
     }
 
     moveArrowToQuestionNote = questionNoteDom => {
@@ -122,31 +131,14 @@ class Fingerboard extends Component {
                 guitarType
             })
         })
-
-    }
-
-    renderGuitar() {
-
-        const { guitarTypeModule: GuitarMarkupComponent } = this.state;
-        return (
-            <div
-                ref={this.guitarNackRef}
-            >
-                {GuitarMarkupComponent &&
-                    <GuitarMarkupComponent
-                        test="1"
-                        {...guitarConfig[this.state.guitarType]}
-                    />
-                }
-            </div>
-        )
     }
 
     render() {
         // eslint-disable-next-line
-        const {trainingStart,questionNote} = this.props;
+        const { trainingStart, questionNote, guitarType} = this.props;
         const { guitarTypeModule: GuitarMarkupComponent } = this.state;
-
+        console.log('guitarConfig', guitarConfig);
+        console.log('guitarConfig[guitarType]', guitarConfig[guitarType]);
         return (
             <div className="Fingerboard">
                 <div className="fingerboard-wrapper">
@@ -162,8 +154,7 @@ class Fingerboard extends Component {
                     >
                         {GuitarMarkupComponent &&
                             <GuitarMarkupComponent
-                                test="1"
-                                {...guitarConfig[this.state.guitarType]}
+                            {...guitarConfig[guitarType]}
                             />
                         }
                     </div>
