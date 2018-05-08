@@ -3,7 +3,7 @@ import React from 'react';
 const ukuleleGuitar = props => {
     const { strings, guitarNeck, frets } = props;
     console.log('frets', frets)
-    const dotsOne = [5, 9, 10,];
+    const dotsOne = [5, 9, 11];
 
     return (
         <div
@@ -53,9 +53,7 @@ const ukuleleGuitar = props => {
 
             {
                 strings.map((_, index) => {
-                    const bass = index > 2 ? 'bass' : '';
-                    const classBassAdd = `string s${index + 1} ${bass}`;
-
+                    const classBassAdd = `string s${index + 1}`;
                     return <div className={classBassAdd} key={index} />
                 })
             }

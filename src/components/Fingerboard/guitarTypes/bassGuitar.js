@@ -54,7 +54,7 @@ const bassGuitar = props => {
 
             {
                 strings.map((_, index) => {
-                    const bass = index > 2 ? 'bass' : '';
+                    const bass = index > 1 ? 'bass' : '';
                     const classBassAdd = `string s${index + 1} ${bass}`;
 
                     return <div className={classBassAdd} key={index} />

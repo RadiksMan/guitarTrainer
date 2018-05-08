@@ -4,7 +4,7 @@ import { setToLocalStorage, getFromLocalStorage} from '../../services/localStora
 
 export const userInitLoad = () => {
     return dispatch => {
-        let userID, userStatistic;
+        let userID;
         if (getFromLocalStorage('userID').length) {
             userID = getFromLocalStorage('userID');
         } else {
@@ -12,13 +12,16 @@ export const userInitLoad = () => {
             setToLocalStorage('userID', userID)
         }
 
+        const userStatistic = getFromLocalStorage('userStatistic');
+        console.log('typeof userStatistic !== \'undefined\' && Object.keys(userStatistic).length', typeof userStatistic !== 'undefined' && Object.keys(userStatistic).length)
 
-        if (typeof getFromLocalStorage('userStatistic') !== 'undefined'){
+        if (typeof userStatistic !== 'undefined' && Object.keys(userStatistic).length ){
+
             dispatch({
                 type: actionTypes.USER_INIT_LOAD,
                 payload: {
                     userID,
-                    userStatistic: getFromLocalStorage('userStatistic')
+                    userStatistic
                 }
             })
         }else {

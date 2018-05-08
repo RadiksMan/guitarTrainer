@@ -1,6 +1,7 @@
 .Fingerboard{flex:0.3;min-height: 200px;display: flex;align-items: center;}
 .fingerboard-wrapper{position: relative;width: 100%;}
 .guitar-neck,.bass-neck,.ukulele-neck{
+	clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 98%);
     position: relative;
     width: 100%;
     min-width: 1000px;
@@ -38,15 +39,10 @@
     top: 0;
     right: 0;
 	z-index: 1;
-	&.f0{border-right-color: #e2e2e2;}
+	&.f0{border-right-color: #e2e2e2;
+		&:after{left:0;top:0;height: 100%;width: 100%;content: '';position: absolute;background-color: rgba(255,255,255,0.2);}
+	}
 }
-
-// $fretRight:100%;
-// @for $i from 0 through 22 {
-//     .f#{$i}{
-//         right: $fretRight - 4.4%;
-//     }
-// }
 
 .f22 {
 	right: 0;
@@ -156,32 +152,32 @@
 
 .s1 {
 	height: 1px;
-	top: 10px;
+	top: 22px;
 }
 
 .s2 {
 	height: 2px;
-	top: 35px;
+	top: 44px;
 }
 
 .s3 {
 	height: 3px;
-	top: 60px;
+	top: 68px;
 }
 
 .s4 {
 	height: 4px;
-	top: 90px;
+	top: 94px;
 }
 
 .s5 {
 	height: 5px;
-	top: 125px;
+	top: 122px;
 }
 
 .s6 {
 	height: 6px;
-	top: 160px;
+	top: 150px;
 }
 
 .bass {
@@ -196,7 +192,7 @@
     border: 1px solid floralwhite;
     border-radius: 1em;
     position: absolute;
-    top: 50%;
+    top: calc(50% - 6px);
     left: 50%;
     margin-left: -0.5em;
     margin-top: -0.5em;
@@ -213,7 +209,7 @@
 	top: 50%;
 	left: 50%;
 	margin-left: -0.5em;
-	margin-top: -2em;
+	margin-top: -3em;
 }
 
 .two-dots:after {
@@ -281,19 +277,19 @@
 }
 
 .n1 {
-	top: 2px;
+	top: 14px;
 }
 
 .n2 {
-	top: 28px;
+	top: 37px;
 }
 
 .n3 {
-	top: 53px;
+	top: 62px;
 }
 
 .n4 {
-	top: 82px;
+	top: 88px;
 }
 
 .n5 {
@@ -301,7 +297,7 @@
 }
 
 .n6 {
-	top: 154px;
+	top: 144px;
 }
 
 
@@ -324,5 +320,110 @@
 		60% {
 		  transform: translateY(-10px);
 		}
+	}
+}
+
+
+
+// Bass styles
+.bass-neck{height: 170px;clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);background: #1c1210 url('https://www.taylorguitars.com/sites/default/files/styles/hero_rotator/public/TaylorGuitars-cites-rosewood-texture-sharp.jpg?itok=5x1dLBOo');background-size: cover;
+	background-position: 50% 30%;
+	.f0{width: 4.5%;
+		.note{margin-left: -1.4ex;}
+	}
+	.f1,.f2,.f3,.f4,.f5{width: 6.6%;}
+	.f6{width: 6.4%;}
+	.f7,.f8,.f9,.f10{width: 4.6%;}
+	.f11{width: 4.6%;}
+	.f12,.f13,.f14,.f15{width: 4.1%;}
+	.f16{width: 3.9%;}
+	.f17{width: 3.3%;}
+	.f18,.f19,.f20{width: 3.1%;}
+
+
+	.f20 {right: 0%;}
+	.f19 {right: 3.1%;}
+	.f18 {right: 6.2%;}
+	.f17 {right: 9.3%;}
+	.f16 {right: 12.6%;}
+	.f15 {right: 16.5%;}
+	.f14 {right: 20.6%;}
+	.f13 {right: 24.7%;}
+	.f12 {right: 28.8%;}
+	.f11 {right: 32.9%;}
+	.f10 {right: 37.5%;}
+	.f9 {right: 42.1%;}
+	.f8 {right: 46.7%;}
+	.f7 {right: 51.3%;}
+	.f6 {right: 55.9%;}
+
+	.f5 {right: 62.5%;}
+	.f4 {right: 69.1%;}
+	.f3 {right: 75.7%;}
+	.f2 {right: 82.3%;}
+	.f1 {right: 88.9%;}
+	.f0 {right: 95.5%;}
+
+	.s1 {height: 6px;top: 27px;}
+	.s2 {height: 8px;top: 61px;}
+	.s3 {height: 10px;top: 96px;}
+	.s4 {height: 12px;top: 132px;}
+
+	.n1 {top: 22px;}
+	.n2 {top: 57px;}
+	.n3 {top: 94px;}
+	.n4 {top: 132px;}
+
+	.dot:after{top: calc(50% - 2px);}
+	.two-dots{
+		&:before{margin-top: -3.1em;}
+		&:after{margin-top: 2em;}
+	}
+}
+
+
+// Ukulele styles
+.ukulele-neck{height: 170px;clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);background: #d9963c url(http://www.guitar-wood.ru/content/images/thumbs/0002537_mahagon-ka-zagotovka-grifa-gitary.jpeg);
+	.f0{width: 3.1%;
+		.note{margin-left: -1.8ex;}
+	}
+	.f1,.f2,.f3,.f4,.f5,.f6{width: 8.8%;}
+	.f7{width: 8.8%;}
+	.f8,.f9,.f10,.f11,.f12{width: 7%;}
+
+	.f12 {right: 0%;}
+	.f11 {right: 7%;}
+	.f10 {right: 14%;}
+	.f9 {right: 21%;}
+	.f8 {right: 28%;}
+	.f7 {right: 35%;}
+
+	.f6 {right: 43.8%;}
+	.f5 {right: 52.6%;}
+	.f4 {right: 61.4%;}
+	.f3 {right: 70.2%;}
+	.f2 {right: 79%;}
+	.f1 {right: 87.8%;}
+	.f0 {right: 96.8%;}
+
+	.s1 {height: 2px;top: 24px;}
+	.s2 {height: 4px;top: 62px;}
+	.s3 {height: 5px;top: 102px;}
+	.s4 {height: 3px;top: 142px;}
+	.string{background: rgba(255, 243, 231, 0.76);}
+
+	.n1 {top: 18px;}
+	.n2 {top: 56px;}
+	.n3 {top: 96px;}
+	.n4 {top: 135px;}
+
+	.fret-line{border-right:0.8ex #c8c8c8 solid;box-shadow:3px 0px 2px -1px rgba(0, 0, 0, 0.44);
+		&.f0{border-right-color:white;}
+	}
+
+	.dot:after{top: calc(50% - 2px);}
+	.two-dots{
+		&:before{margin-top: -3.1em;}
+		&:after{margin-top: 2em;}
 	}
 }

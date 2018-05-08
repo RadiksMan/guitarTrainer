@@ -19,7 +19,7 @@ const guitarType = [
 ]
 
 const initialState = {
-  guitarType: guitarType[1],
+  guitarType: guitarType[2],
   guitarTypeList: guitarType,
   guitarConfig: guitars["standartGuitar"],
 

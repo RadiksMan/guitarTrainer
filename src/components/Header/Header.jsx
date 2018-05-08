@@ -29,10 +29,18 @@ class Header extends Component {
 
                 <div className="controls">
                     <div className="select select-guitarType">
-                        <select onChange={this.handleGuitarTypeChange}>
+                        <select
+                            onChange={this.handleGuitarTypeChange}
+                            value={this.props.guitarType}
+                        >
                             {
                                 this.props.guitarTypeList.map((item,i)=>(
-                                    <option value={item} key={i}>{guitarTypeName[i] || '...'}</option>
+                                    <option
+                                        value={item}
+                                        key={i}
+                                    >
+                                        {guitarTypeName[i] || '...'}
+                                    </option>
                                 ))
                             }
                         </select>
@@ -55,6 +63,7 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         guitarTypeList: state.guitar.guitarTypeList,
+        guitarType: state.guitar.guitarType,
     }
 }
 
