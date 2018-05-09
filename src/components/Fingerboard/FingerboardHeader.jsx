@@ -3,20 +3,28 @@ import {connect} from 'react-redux';
 import './style/FingerboardHeader.css';
 
 const FingerboardHeader = props => {
-    const {all,correct,wrong} = props.user.userStatistic.answers;
-
+    const {
+        user: {
+            userStatistic: {
+                answers
+            }
+        },
+        guitarType
+    } = props;
+    console.log('answers', answers)
+    console.log('guitarType', guitarType)
     return(
         <div className="FingerboardHeader">
             <div className="user-score">
                 <h3>Score</h3>
                 <div className="user-score-item correct">
-                    Correctly - <span>{correct}</span>
+                    Correctly - <span>{answers[guitarType].correct}</span>
                 </div>
                 <div className="user-score-item wrong">
-                    Wrong - <span>{wrong}</span>
+                    Wrong - <span>{answers[guitarType].wrong}</span>
                 </div>
                 <div className="user-score-item all">
-                    Total - {all}
+                    Total - {answers[guitarType].all}
                 </div>
             </div>
         </div>
@@ -25,7 +33,8 @@ const FingerboardHeader = props => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        guitarType: state.guitar.guitarType,
     }
 }
 

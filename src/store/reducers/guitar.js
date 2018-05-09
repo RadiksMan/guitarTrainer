@@ -21,7 +21,7 @@ const guitarType = [
 const initialState = {
   guitarType: guitarType[2],
   guitarTypeList: guitarType,
-  guitarConfig: guitars["standartGuitar"],
+  guitarConfig: guitars["ukuleleGuitar"],
 
   trainingStart: false,
   stage: guitarStage[0],

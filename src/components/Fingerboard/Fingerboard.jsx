@@ -61,8 +61,8 @@ class Fingerboard extends Component {
 
     askQuestionNote = questionNote => {
         const {fretNumber,noteNumber} = questionNote;
-
         const guitarNeck = this.guitarNackRef.current;
+
         this.questionNoteDom = guitarNeck.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
 
         if(this.questionNoteDom){
@@ -94,7 +94,6 @@ class Fingerboard extends Component {
     toggleShowAllNotes = (hide = false) => {
         // TODO - ref to parent !!!!!!
         const guitarNeck = this.guitarNackRef.current;
-        console.log('guitarNeck', guitarNeck)
         guitarNeck.firstChild.classList.toggle('show-all-notes')
     }
 
@@ -137,8 +136,7 @@ class Fingerboard extends Component {
         // eslint-disable-next-line
         const { trainingStart, questionNote, guitarType} = this.props;
         const { guitarTypeModule: GuitarMarkupComponent } = this.state;
-        console.log('guitarConfig', guitarConfig);
-        console.log('guitarConfig[guitarType]', guitarConfig[guitarType]);
+
         return (
             <div className="Fingerboard">
                 <div className="fingerboard-wrapper">

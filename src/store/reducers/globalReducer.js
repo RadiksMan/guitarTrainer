@@ -5,11 +5,11 @@ const globalReducer = (state, action) => {
     switch (action.type) {
         case actionTypes.USER_SELECTED_NOTE_START:
 
-            const { userAnswer: { userAnswerCorrect}} = state.guitar;
+            const { userAnswer: { userAnswerCorrect }, guitarType} = state.guitar;
             let {userStatistic:{answers}} = state.user;
 
-            userAnswerCorrect ? answers['correct']++ : answers['wrong']++;
-            answers['all']++;
+            userAnswerCorrect ? answers[guitarType]['correct']++ : answers[guitarType]['wrong']++;
+            answers[guitarType]['all']++;
 
             setToLocalStorage('userStatistic',{
                 ...state.user.userStatistic,

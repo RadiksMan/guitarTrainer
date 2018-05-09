@@ -2,7 +2,6 @@ import React from 'react';
 
 const bassGuitar = props => {
     const { strings, guitarNeck, frets } = props;
-    console.log('frets', frets)
     const dotsOne = [3, 5, 7, 9, 15,17,19];
     const dotsTwo = [12];
 
