@@ -14,7 +14,7 @@ export const userInitLoad = () => {
 
         const userStatistic = getFromLocalStorage('userStatistic');
 
-        if (typeof userStatistic !== 'undefined' && Object.keys(userStatistic).length !== 0 && userStatistic.constructor === Object){
+        if (typeof userStatistic !== 'undefined' && Object.keys(userStatistic).length !== 0){
 
             dispatch({
                 type: actionTypes.USER_INIT_LOAD,
