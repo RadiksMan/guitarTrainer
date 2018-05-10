@@ -1,9 +1,16 @@
 .Header{display: flex;align-items: center;justify-content: space-between;padding: 1em 2em;}
 .controls{flex:0.7;display: flex;align-items: center;justify-content: flex-end;
-    .btn{margin-bottom: 0;}
+    .btn{margin-bottom: 0;margin-left: 1.5em;}
 
     //select
     .select-guitarType{width: 150px;
-        .Select-control{height: 45px;}
+        .Select-control{height: 45px;color:white;border-color:white;background: transparent;border-radius: 0;}
+        .Select-placeholder,.Select-value{color:white;text-align: center;}
+        .Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label{color:white;line-height: 42px;text-transform: uppercase;font-size: 15px;}
+        .Select-arrow{border-top-color:white;}
+        .Select.is-open > .Select-control .Select-arrow{border-color: transparent transparent white;}
+        .Select-option.is-focused,.Select-option.is-selected{background-color: #ffffc2;background-color: rgba(255, 255, 194, 0.24);color: #333;}
+        .Select.is-focused:not(.is-open) > .Select-control{background: transparent;border-color:#fcfcfc;}
+        .Select-input{padding:0;display: none !important;}
     }
 }

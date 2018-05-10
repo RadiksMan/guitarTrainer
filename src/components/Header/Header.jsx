@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import shortid  from 'shortid';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -10,13 +9,11 @@ import './style/Header.css';
 
 class Header extends Component {
 
-
     componentWillMount(){
         this.props.userInitLoad();
     }
 
     handleGuitarTypeChange = selectedOption => {
-        console.log('selectedOption', selectedOption)
         const selectedGuitarType = selectedOption.value;
         if (selectedGuitarType){
             this.props.changeGuitarType(selectedGuitarType)
@@ -86,28 +83,16 @@ class Header extends Component {
 
                 <div className="controls">
                     <div className="select select-guitarType">
-                        {/* <select
-                            onChange={this.handleGuitarTypeChange}
-                            value={this.props.guitarType}
-                        >
-                            {
-                                this.props.guitarTypeList.map((item,i)=>(
-                                    <option
-                                        value={item}
-                                        key={i}
-                                    >
-                                        {guitarTypeName[i] || '...'}
-                                    </option>
-                                ))
-                            }
-                        </select> */}
+
                         <Select
                             value={this.props.guitarType}
                             onChange={this.handleGuitarTypeChange}
                             options={selectOptions}
                             clearable={false}
+                            searchable={false}
                             multi={false}
                         />
+
                     </div>
                     <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
                         <svg>
