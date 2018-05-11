@@ -5,31 +5,31 @@ import { setToLocalStorage, getFromLocalStorage} from '../../services/localStora
 export const userInitLoad = () => {
     return dispatch => {
         let userID;
-        if (getFromLocalStorage('userID').length) {
-            userID = getFromLocalStorage('userID');
+        if (getFromLocalStorage('guitarTrainer__userID').length) {
+            userID = getFromLocalStorage('guitarTrainer__userID');
         } else {
             userID = shortid.generate();
-            setToLocalStorage('userID', userID)
+            setToLocalStorage('guitarTrainer__userID', userID)
         }
 
-        const userStatistic = getFromLocalStorage('userStatistic');
+        const payload = {
+            userID
+        }
 
+        const userStatistic = getFromLocalStorage('guitarTrainer__userStatistic');
         if (typeof userStatistic !== 'undefined' && Object.keys(userStatistic).length !== 0){
-
-            dispatch({
-                type: actionTypes.USER_INIT_LOAD,
-                payload: {
-                    userID,
-                    userStatistic
-                }
-            })
-        }else {
-            dispatch({
-                type: actionTypes.USER_INIT_LOAD,
-                payload: {
-                    userID
-                }
-            })
+            payload['userStatistic'] = userStatistic
         }
+
+        const guitarType = getFromLocalStorage('guitarTrainer__guitarType');
+        if (guitarType && guitarType.length){
+            payload['guitarType'] = guitarType;
+        }
+
+        dispatch({
+            type: actionTypes.USER_INIT_LOAD,
+            payload
+        })
+
     }
 }

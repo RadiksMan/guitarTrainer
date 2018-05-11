@@ -11,8 +11,7 @@ const FingerboardHeader = props => {
         },
         guitarType
     } = props;
-    console.log('answers', answers)
-    console.log('guitarType', guitarType)
+
     return(
         <div className="FingerboardHeader">
             <div className="user-score">

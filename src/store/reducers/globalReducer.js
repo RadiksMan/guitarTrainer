@@ -11,7 +11,7 @@ const globalReducer = (state, action) => {
             userAnswerCorrect ? answers[guitarType]['correct']++ : answers[guitarType]['wrong']++;
             answers[guitarType]['all']++;
 
-            setToLocalStorage('userStatistic',{
+            setToLocalStorage('guitarTrainer__userStatistic',{
                 ...state.user.userStatistic,
                 answers
             })

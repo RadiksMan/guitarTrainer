@@ -20,11 +20,6 @@ class Fingerboard extends Component {
         this.updateGuitarType(this.state.guitarType)
     }
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if (nextState.guitarType === this.state.guitarType) return false;
-    //     return true;
-    // }
-
     UNSAFE_componentWillReceiveProps(nextProps){
 
         switch(nextProps.stage){
@@ -115,7 +110,7 @@ class Fingerboard extends Component {
     }
 
     showAnswerToUserSTART = userAnswer => {
-        const { userAnswerCorrect, userAnswerNote, correctUnswerNote:{noteName,fretNumber,noteNumber} } = userAnswer;
+        const { userAnswerCorrect, correctUnswerNote:{fretNumber,noteNumber} } = userAnswer;
 
         const questionNoteDom = this.guitarNackRef.current.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
 

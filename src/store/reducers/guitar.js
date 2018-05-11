@@ -88,6 +88,15 @@ export default (state = initialState, action) => {
         guitarType: action.payload.guitarType,
         guitarConfig: guitars[action.payload.guitarType]
       }
+    case actionTypes.USER_INIT_LOAD:
+      const { guitarType} = action.payload;
+      if (guitarType && action.payload.guitarType !== state.guitarType){
+        return{
+          ...state,
+          guitarType:action.payload.guitarType
+        }
+      }
+      return state;
 
     default:
       return state;
