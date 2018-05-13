@@ -20,6 +20,14 @@ class Fingerboard extends Component {
         this.updateGuitarType(this.state.guitarType)
     }
 
+    componentDidMount(){
+        window.addEventListener('resize',()=>this.moveArrowToQuestionNote(this.questionNoteDom))
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener('resize',this.moveArrowToQuestionNote(this.questionNoteDom))
+    }
+
     UNSAFE_componentWillReceiveProps(nextProps){
 
         switch(nextProps.stage){
@@ -65,8 +73,6 @@ class Fingerboard extends Component {
             this.questionNoteDom.classList.add('question');
             this.moveArrowToQuestionNote(this.questionNoteDom)
 
-        }else {
-            throw new Error('Error in askQuestionNote() - miss the question Note!');
         }
     }
 
@@ -93,6 +99,8 @@ class Fingerboard extends Component {
     }
 
     moveArrowToQuestionNote = questionNoteDom => {
+        if (!questionNoteDom) return false;
+        
         const arrow = this.arrowRef.current;
         const guitarNeck = this.guitarNackRef.current;
 
@@ -100,6 +108,7 @@ class Fingerboard extends Component {
 
         const guitarNeckPos = getOffset(guitarNeck);
         const questionNoteDomPos = getOffset(questionNoteDom);
+
         const questionNotePos = {
             left:questionNoteDomPos.left - guitarNeckPos.left,
             top:questionNoteDomPos.top - guitarNeckPos.top,
