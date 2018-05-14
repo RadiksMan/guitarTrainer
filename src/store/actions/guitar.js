@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import { setToLocalStorage } from '../../services/localStorage';
 
 const ANSWER_TIMING = 3000;
+let userSelectNoteTimer;
 
 export const trainStart = () => {
     return {
@@ -17,13 +18,13 @@ export const trainEnd = () => {
 
 export const userSelectedNote = userAnswerNote => {
     return dispatch => {
-
+        clearTimeout(userSelectNoteTimer)
         dispatch({
             type: actionTypes.USER_SELECTED_NOTE_START,
             payload: {userAnswerNote}
         })
 
-        setTimeout(() => {
+        userSelectNoteTimer = setTimeout(() => {
             dispatch({
                 type: actionTypes.USER_SELECTED_NOTE_END
             })

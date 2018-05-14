@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import "./style/FingerboardButtons.css";
 import {
@@ -124,7 +123,7 @@ class FingerboardButtons extends PureComponent {
               <i className="keyboardKey">{this.keyboardNotes[i]}</i>
             </li>
           ))}
-        </ul>       
+        </ul>
 
       </div>
     );

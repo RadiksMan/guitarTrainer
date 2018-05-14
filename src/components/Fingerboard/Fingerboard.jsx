@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import {
+    trainEnd as trainEndAction,
+} from "../../store/actions/guitar";
 import {getOffset} from '../../services/utility';
 import guitarConfig from '../../json/guitar.json';
 import './style/Fingerboard.css';
@@ -56,7 +59,7 @@ class Fingerboard extends Component {
                     this.toggleShowAllNotes();
                 }
                 if (nextProps.guitarType !== this.props.guitarType) {
-                    this.updateGuitarType(nextProps.guitarType );
+                    this.updateGuitarType(nextProps.guitarType);
                 }
                 break
         }
@@ -72,7 +75,6 @@ class Fingerboard extends Component {
             //show note
             this.questionNoteDom.classList.add('question');
             this.moveArrowToQuestionNote(this.questionNoteDom)
-
         }
     }
 
@@ -100,7 +102,7 @@ class Fingerboard extends Component {
 
     moveArrowToQuestionNote = questionNoteDom => {
         if (!questionNoteDom) return false;
-        
+
         const arrow = this.arrowRef.current;
         const guitarNeck = this.guitarNackRef.current;
 
@@ -121,9 +123,18 @@ class Fingerboard extends Component {
     showAnswerToUserSTART = userAnswer => {
         const { userAnswerCorrect, correctUnswerNote:{fretNumber,noteNumber} } = userAnswer;
 
-        const questionNoteDom = this.guitarNackRef.current.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
+        let questionNoteDom = this.guitarNackRef.current.querySelector(`.fret.f${fretNumber} .note.n${noteNumber}`)
 
-        questionNoteDom.classList.add(userAnswerCorrect ? 'answer-correct' : 'answer-wrong')
+        this.questionNoteClear();
+
+        if (questionNoteDom){
+            questionNoteDom.classList.add(userAnswerCorrect ? 'answer-correct' : 'answer-wrong')
+        }else {
+
+            this.props.trainEndAction();
+            this.trainEnd();
+            alert('Error, you train too fast !!!')
+        }
     }
 
     updateGuitarType = guitarType => {
@@ -179,5 +190,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    null
+    { trainEndAction}
 )(Fingerboard);
