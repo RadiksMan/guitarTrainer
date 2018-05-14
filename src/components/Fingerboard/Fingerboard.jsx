@@ -65,8 +65,6 @@ class Fingerboard extends Component {
             this.questionNoteDom.classList.add('question');
             this.moveArrowToQuestionNote(this.questionNoteDom)
 
-        }else {
-            throw new Error('Error in askQuestionNote() - miss the question Note!');
         }
     }
 

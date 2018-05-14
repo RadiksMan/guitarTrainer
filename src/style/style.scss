@@ -3,6 +3,8 @@ $primary:#ffc157;
 html {
   box-sizing: border-box;
   height: 100%;
+  background-color:#ffa409;
+  background:linear-gradient(#ffc157,#ffa409);
 }
 
 *,
@@ -17,7 +19,19 @@ body {
   font-family: 'Fira Sans', sans-serif;
   color: black;
   height: 100%;
-  background-color: $primary;
+  &:after{
+    content:'';
+    position: absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    display:block;
+    background-image:linear-gradient(90deg, rgba(255,255,255,.1) 1px, rgba(0,0,0,0) 1px), linear-gradient(0deg, rgba(255,255,255,.1) 1px, rgba(0,0,0,0) 1px);
+    background-position:0px 1px;
+    background-repeat:repeat;
+    background-size:4px 4px;
+  }
 }
 
 img,
@@ -27,7 +41,7 @@ audio {
   height: auto;
 }
 
-#root{height: 100%;width: 100%;display: flex;}
+#root{height: 100%;width: 100%;display: flex;position: relative;z-index: 1;}
 .App,.main{display: flex;flex:1;flex-direction: column;}
 
 // buttons
@@ -44,7 +58,7 @@ audio {
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  background: darken($primary, 1.5%);
+  background: rgba(255, 190, 79, 0.45);
   font-weight: 100;
   transition:all ease .3s;
   user-select: none;
