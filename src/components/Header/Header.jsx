@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -8,7 +8,7 @@ import { userInitLoad} from '../../store/actions/user';
 import HeaderLogo from './HeaderLogo';
 import './style/Header.css';
 
-class Header extends Component {
+class Header extends PureComponent {
 
     componentWillMount(){
         this.props.userInitLoad();

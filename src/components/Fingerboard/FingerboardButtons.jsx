@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import "./style/FingerboardButtons.css";
 import {
@@ -105,14 +106,7 @@ class FingerboardButtons extends PureComponent {
     const { trainingStart } = this.props;
     return (
       <div className="FingerboardButtons">
-        <ul className="notes-list" ref={this.buttonHolder}>
-          {this.notes.map((note, i) => (
-            <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
-              <span>{note.toUpperCase()}</span>
-              <i className="keyboardKey">{this.keyboardNotes[i]}</i>
-            </li>
-          ))}
-        </ul>
+
         <div className="btn" onClick={this.buttonStartPressed}>
           <svg>
             <rect x="0" y="0" fill="none" width="100%" height="100%" />
@@ -122,6 +116,16 @@ class FingerboardButtons extends PureComponent {
           </span>
           <i className="keyboardKey">space</i>
         </div>
+
+        <ul className="notes-list" ref={this.buttonHolder}>
+          {this.notes.map((note, i) => (
+            <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
+              <span>{note.toUpperCase()}</span>
+              <i className="keyboardKey">{this.keyboardNotes[i]}</i>
+            </li>
+          ))}
+        </ul>       
+
       </div>
     );
   }
