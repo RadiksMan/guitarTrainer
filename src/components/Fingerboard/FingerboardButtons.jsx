@@ -1,5 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import "./style/FingerboardButtons.css";
 import {
@@ -79,7 +84,7 @@ class FingerboardButtons extends PureComponent {
     } = userAnswer;
 
     const selectedNoteDom = this.buttonHolder.current.querySelector(
-      `li[data-note="${userAnswerNote.toLowerCase()}"]`
+      `.notes-list li[data-note="${userAnswerNote.toLowerCase()}"]`
     );
 
     if (userAnswerCorrect) {
@@ -95,7 +100,7 @@ class FingerboardButtons extends PureComponent {
   };
 
   answerToUserClear = () => {
-    const buttonsAll = this.buttonHolder.current.querySelectorAll("li");
+    const buttonsAll = this.buttonHolder.current.querySelectorAll(".notes-list li");
     buttonsAll.forEach(item =>
       item.classList.remove("answer-correct", "answer-wrong")
     );
@@ -103,8 +108,11 @@ class FingerboardButtons extends PureComponent {
 
   render() {
     const { trainingStart } = this.props;
+    const transitionTiming = 300;
+    let leftItems = 0,rightItems = 0;
+
     return (
-      <div className="FingerboardButtons">
+      <div className="FingerboardButtons" ref={this.buttonHolder}>
 
         <div className="btn" onClick={this.buttonStartPressed}>
           <svg>
@@ -116,14 +124,39 @@ class FingerboardButtons extends PureComponent {
           <i className="keyboardKey">space</i>
         </div>
 
-        <ul className="notes-list" ref={this.buttonHolder}>
-          {this.notes.map((note, i) => (
-            <li key={i} data-note={note} onClick={() => this.pressOnNote(note)}>
-              <span>{note.toUpperCase()}</span>
-              <i className="keyboardKey">{this.keyboardNotes[i]}</i>
-            </li>
-          ))}
-        </ul>
+        <ReactCSSTransitionGroup
+          className="notes-list"
+          component="ul"
+          transitionName="fade"
+          transitionEnterTimeout={transitionTiming}
+          transitionLeaveTimeout={transitionTiming}>
+          {
+            this.props.trainingStart && this.notes.map((note, i, noteArray) => {
+              const noteMiddleLength = noteArray.length / 2;
+              const transIteration = transitionTiming/noteMiddleLength;
+              console.log('transIteration', transIteration)
+              let transitionDelay = 0;
+              if (noteMiddleLength > i){
+                console.log('left',i)
+              }else {
+                console.log('right', i)
+
+              }
+
+              return (
+                <li
+                  key={i}
+                  data-note={note}
+                  onClick={() => this.pressOnNote(note)}
+                  style={{ transitionDelay: transitionDelay+'s'}}
+                >
+                  <span>{note.toUpperCase()}</span>
+                  <i className="keyboardKey">{this.keyboardNotes[i]}</i>
+                </li>
+              )
+            })
+          }
+        </ReactCSSTransitionGroup>
 
       </div>
     );

@@ -59,8 +59,9 @@ export default (state = initialState, action) => {
         userAnswer: verifyCorrectUserAnswer(userAnswerNote, state.questionNote)
       };
     case actionTypes.USER_SELECTED_NOTE_END:
+
       if(!state.trainingStart){
-        return {...state}
+        return state;
       }
       return {
           ...state,

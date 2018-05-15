@@ -17,7 +17,7 @@ export const trainEnd = () => {
 }
 
 export const userSelectedNote = userAnswerNote => {
-    return dispatch => {
+    return (dispatch, getState) => {
         clearTimeout(userSelectNoteTimer)
         dispatch({
             type: actionTypes.USER_SELECTED_NOTE_START,
@@ -25,9 +25,13 @@ export const userSelectedNote = userAnswerNote => {
         })
 
         userSelectNoteTimer = setTimeout(() => {
-            dispatch({
-                type: actionTypes.USER_SELECTED_NOTE_END
-            })
+            const {stage} = getState().guitar;
+
+            if (stage !== null){
+                dispatch({
+                    type: actionTypes.USER_SELECTED_NOTE_END
+                })
+            }
         }, ANSWER_TIMING);
     };
 }

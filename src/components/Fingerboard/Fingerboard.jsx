@@ -40,6 +40,7 @@ class Fingerboard extends Component {
                     this.questionNoteClear();
                 }
                 if (nextProps.questionNote !== this.props.questionNote){
+                    this.questionNoteClear();
                     this.askQuestionNote(nextProps.questionNote)
                 }
                 if(this.props.showAllNotes){
@@ -81,6 +82,7 @@ class Fingerboard extends Component {
     questionNoteClear = () => {
         if(this.questionNoteDom){
             this.questionNoteDom.classList.remove('question','answer-correct','answer-wrong')
+            //this.guitarNackRef.current.querySelectorAll(`.note`).forEach(item => item.classList.remove('question', 'answer-correct', 'answer-wrong'))
         }
     }
 
