@@ -1,9 +1,5 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import "./style/FingerboardButtons.css";
@@ -29,6 +25,7 @@ class FingerboardButtons extends PureComponent {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line
     switch (nextProps.stage) {
       case "showQuestion":
         if (this.props.stage === "showAnswer") {
@@ -108,8 +105,6 @@ class FingerboardButtons extends PureComponent {
 
   render() {
     const { trainingStart } = this.props;
-    const transitionTiming = 300;
-    let leftItems = 0,rightItems = 0;
 
     return (
       <div className="FingerboardButtons" ref={this.buttonHolder}>
@@ -128,27 +123,15 @@ class FingerboardButtons extends PureComponent {
           className="notes-list"
           component="ul"
           transitionName="fade"
-          transitionEnterTimeout={transitionTiming}
-          transitionLeaveTimeout={transitionTiming}>
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={200}>
           {
             this.props.trainingStart && this.notes.map((note, i, noteArray) => {
-              const noteMiddleLength = noteArray.length / 2;
-              const transIteration = transitionTiming/noteMiddleLength;
-              console.log('transIteration', transIteration)
-              let transitionDelay = 0;
-              if (noteMiddleLength > i){
-                console.log('left',i)
-              }else {
-                console.log('right', i)
-
-              }
-
               return (
                 <li
                   key={i}
                   data-note={note}
                   onClick={() => this.pressOnNote(note)}
-                  style={{ transitionDelay: transitionDelay+'s'}}
                 >
                   <span>{note.toUpperCase()}</span>
                   <i className="keyboardKey">{this.keyboardNotes[i]}</i>

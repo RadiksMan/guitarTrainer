@@ -32,7 +32,7 @@ class Fingerboard extends Component {
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
-
+        // eslint-disable-next-line
         switch(nextProps.stage){
             case 'showQuestion':
                 if(this.props.stage === 'showAnswer'){
