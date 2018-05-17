@@ -82,7 +82,6 @@ class Fingerboard extends Component {
     questionNoteClear = () => {
         if(this.questionNoteDom){
             this.questionNoteDom.classList.remove('question','answer-correct','answer-wrong')
-            //this.guitarNackRef.current.querySelectorAll(`.note`).forEach(item => item.classList.remove('question', 'answer-correct', 'answer-wrong'))
         }
     }
 
@@ -151,7 +150,7 @@ class Fingerboard extends Component {
 
     render() {
         // eslint-disable-next-line
-        const { trainingStart, questionNote, guitarType} = this.props;
+        const { guitarType } = this.props;
         const { guitarTypeModule: GuitarMarkupComponent } = this.state;
 
         return (

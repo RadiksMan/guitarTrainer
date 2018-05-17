@@ -68,4 +68,11 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { toggleShowAllNotes, userInitLoad, changeGuitarType})(Header);
+export default connect(
+    mapStateToProps,
+    {
+        toggleShowAllNotes,
+        userInitLoad,
+        changeGuitarType
+    }
+)(Header);

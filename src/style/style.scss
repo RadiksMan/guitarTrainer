@@ -1,5 +1,4 @@
-$primary:#ffc157;
-$secondary:#ffa409;
+@import 'variables.scss';
 
 html {
   box-sizing: border-box;
@@ -48,90 +47,5 @@ audio {
 }
 
 #root{height: 100%;width: 100%;display: flex;position: relative;z-index: 1;}
+
 .App,.main{display: flex;flex:1;flex-direction: column;}
-
-// buttons
-.btn{
-  color: #fff;
-  cursor: pointer;
-  font-size:16px;
-  font-weight: 400;
-  line-height: 45px;
-  margin: 0 0 2em;
-  max-width: 160px;
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: 100%;
-  text-align: center;
-  background: rgba(255, 190, 79, 0.45);
-  font-weight: 100;
-  transition:all ease .3s;
-  user-select: none;
-  &.btn-wide{
-    max-width: 200px;
-    font-size:15px;
-  }
-
-  svg {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-  rect {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 2;
-    stroke-dasharray: 422, 0;
-    transition-delay: none;
-  }
-  span{
-    transition:all ease .3s;
-    position: relative;
-  }
-  .keyboardKey{
-    line-height: 1;
-    font-size: 9px;
-    bottom: 3px;
-    right: 4px;
-    text-transform: none;
-    font-weight: normal;
-    transition:all ease .2s;
-  }
-
-  &:hover{
-    background: rgba($primary, 0);
-    font-weight: 900;
-    letter-spacing: 1px;
-
-    rect {
-      stroke-width: 5;
-      stroke-dasharray: 20, 302;
-      stroke-dashoffset: 48;
-      transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    .keyboardKey{
-      opacity:0;
-      font-weight: normal;
-      letter-spacing: 0px;
-    }
-    &.btn-wide{
-      rect{stroke-dasharray: 40, 325;}
-    }
-  }
-  &:active{
-    span{top:2px;}
-  }
-}
-
-.keyboardKey{
-  position: absolute;
-  bottom:2px;
-  right:5px;
-  font-size: 11px;
-  opacity: .7;
-  font-style: normal;
-  user-select: none;
-}
