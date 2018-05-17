@@ -1,10 +1,13 @@
 $primary:#ffc157;
+$secondary:#ffa409;
 
 html {
   box-sizing: border-box;
-  height: 100%;
-  background-color:#ffa409;
-  background:linear-gradient(#ffc157,#ffa409);
+  background-color:$secondary;
+  background:linear-gradient($primary,$secondary);
+  @media screen and (max-width:1024px){
+    background: none;
+  }
 }
 
 *,
@@ -18,19 +21,22 @@ body {
   padding: 0;
   font-family: 'Fira Sans', sans-serif;
   color: black;
-  height: 100%;
+  position: relative;
   &:after{
     content:'';
     position: absolute;
     left:0;
     top:0;
-    height:100%;
-    width:100%;
+    right:0;
+    bottom:0;
     display:block;
     background-image:linear-gradient(90deg, rgba(255,255,255,.1) 1px, rgba(0,0,0,0) 1px), linear-gradient(0deg, rgba(255,255,255,.1) 1px, rgba(0,0,0,0) 1px);
     background-position:0px 1px;
     background-repeat:repeat;
     background-size:4px 4px;
+  }
+  @media screen and (max-width:1024px){
+    &:after{display: none;}
   }
 }
 
