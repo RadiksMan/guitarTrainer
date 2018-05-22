@@ -2,13 +2,15 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import "./style/FingerboardButtons.css";
 import {
   trainStart,
   trainEnd,
   userSelectedNote,
   toggleShowAllNotes
 } from "../../store/actions/guitar";
+import StandartButton from '../../ui/buttons/StandartButton';
+
+import "./style/FingerboardButtons.css";
 
 class FingerboardButtons extends PureComponent {
   buttonHolder = React.createRef();
@@ -109,15 +111,11 @@ class FingerboardButtons extends PureComponent {
     return (
       <div className="FingerboardButtons" ref={this.buttonHolder}>
 
-        <div className="btn" onClick={this.buttonStartPressed}>
-          <svg>
-            <rect x="0" y="0" fill="none" width="100%" height="100%" />
-          </svg>
-          <span>
-            {!trainingStart ? "START" : "END"}
-          </span>
-          <i className="keyboardKey">space</i>
-        </div>
+        <StandartButton
+          onClick={this.buttonStartPressed}
+          text={!trainingStart ? "START" : "END"}
+          keycupsName="space"
+        />
 
         <ReactCSSTransitionGroup
           className="notes-list"
@@ -126,7 +124,7 @@ class FingerboardButtons extends PureComponent {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={200}>
           {
-            this.props.trainingStart && this.notes.map((note, i, noteArray) => {
+            this.props.trainingStart && this.notes.map((note, i) => {
               return (
                 <li
                   key={i}

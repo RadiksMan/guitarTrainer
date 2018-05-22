@@ -1,19 +1,25 @@
 import React from 'react';
-import './style/StandartButton.scss';
+import './style/StandartButton.css'
 
-export default StandartButton = props => {
+const StandartButton = props => {
 
-    const { onClick,text,} = props;
+    const { onClick,text,keycupsName,wide} = props;
 
     return(
-        <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
+        <div
+            className={`btn ${wide ? 'btn-wide' : ''} `}
+            onClick={onClick}
+        >
             <svg>
                 <rect x="0" y="0" fill="none" width="100%" height="100%" />
             </svg>
             <span>
-                <span>Show all notes</span>
+                <span>{text}</span>
             </span>
-            <i className="keyboardKey">backspace</i>
+            {
+                keycupsName && <i className="keyboardKey">{keycupsName}</i>
+            }
         </div>
     )
 }
+export default StandartButton;

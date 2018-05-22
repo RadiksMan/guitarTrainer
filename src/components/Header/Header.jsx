@@ -5,6 +5,8 @@ import 'react-select/dist/react-select.css';
 
 import { toggleShowAllNotes, changeGuitarType} from '../../store/actions/guitar';
 import { userInitLoad} from '../../store/actions/user';
+
+import StandartButton from '../../ui/buttons/StandartButton';
 import HeaderLogo from './HeaderLogo';
 import './style/Header.css';
 
@@ -46,15 +48,13 @@ class Header extends PureComponent {
                         />
 
                     </div>
-                    <div className="btn btn-wide" onClick={this.props.toggleShowAllNotes}>
-                        <svg>
-                            <rect x="0" y="0" fill="none" width="100%" height="100%" />
-                        </svg>
-                        <span>
-                            <span>Show all notes</span>
-                        </span>
-                        <i className="keyboardKey">backspace</i>
-                    </div>
+
+                    <StandartButton
+                        onClick={this.props.toggleShowAllNotes}
+                        text="Show all notes"
+                        keycupsName="backspace"
+                        wide
+                    />
                 </div>
             </div>
         )
