@@ -156,12 +156,10 @@ class Fingerboard extends Component {
         return (
             <div className="Fingerboard">
                 <div className="fingerboard-wrapper">
-                    <div
-                        className="arrow"
-                        ref={this.arrowRef}
-                    >
-                        <div className="arrowBody"></div>
-                    </div>
+
+                    <FingerboardArrow
+                        arrowRef={this.arrowRef}
+                    />
 
                     <div
                         ref={this.guitarNackRef}
@@ -177,6 +175,27 @@ class Fingerboard extends Component {
         )
     }
 }
+
+const FingerboardArrow = props => {
+
+    return(
+        <div
+            className="arrow"
+            ref={props.arrowRef}
+        >
+            <div className="arrowBody">
+                <svg width="23.999999999999996" height="35" xmlns="http://www.w3.org/2000/svg" >
+                    <g>
+                        <path fill="#fff" d="m23.13629,18.42812l-6.08583,0l0,-18.29797c0,-0.40423 -0.24866,-0.73195 -0.55544,-0.73195l-8.88769,0c-0.30678,0 -0.5555,0.32771 -0.5555,0.73195l0,18.29804l-6.11025,0c-0.30678,0.00007 -0.55544,0.32786 -0.55534,0.73208c0.00005,0.19364 0.05833,0.37946 0.16206,0.51656l11.08181,14.65012c0.1042,0.13772 0.2457,0.21512 0.39328,0.21518l0,0c0.14743,0.00034 0.28892,-0.07651 0.39328,-0.21374l11.10957,-14.65012c0.21721,-0.28545 0.21763,-0.74889 0.00099,-1.0351c-0.10363,-0.13689 -0.24419,-0.21422 -0.39093,-0.21505l0,0z" />
+                    </g>
+                </svg>
+            </div>
+
+        </div>
+    )
+}
+
+
 
 const mapStateToProps = state => {
     return {

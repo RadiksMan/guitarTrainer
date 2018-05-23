@@ -299,14 +299,11 @@
 }
 
 
-.arrow{position: absolute;left:49%;top:49%;z-index: 2;transition:all ease 0s;opacity:0;visibility:hidden;pointer-events:none;width: 1px;height: 1px;margin-left: -1px;
+.arrow{position: absolute;left:49%;top:49%;z-index: 2;transition:all ease 0s;opacity:0;visibility:hidden;pointer-events:none;will-change: left, top, opacity;
 	&.active{opacity:1;visibility: visible;pointer-events:all;transition-duration:0.3s;
 		.arrowBody{animation-play-state: running;}
 	}
-	.arrowBody{animation: bounce 1.5s infinite;animation-play-state: paused;
-		&:after{width: 1.2em;height: 1.2em;content: '';border-right:5px solid white;border-bottom: 5px  solid white;position: absolute;border-radius:2px;transform: rotate(45deg);top: -1.25em;left: -0.58em;}
-		&:before{height: 1.8em;width: 5px;position: absolute;content: '';background-color: #fff;top: -1.9em;left: -2px;border-radius:2px;}
-	}
+	.arrowBody{animation: bounce 1.5s infinite;animation-play-state: paused;margin-left:-12px;margin-top:-31px;}
 
 	@keyframes bounce {
 		0%, 20%, 50%, 80%, 100% {

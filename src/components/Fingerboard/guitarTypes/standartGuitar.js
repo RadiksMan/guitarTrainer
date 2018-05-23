@@ -18,8 +18,14 @@ const standartGuitar = props => {
 
                     Object.keys(fret).forEach((key) => {
 
-                        const { note } = fret[key];
-                        const classNotesName = `note n${key} ${note.toLowerCase()}`;
+                        const {note} = fret[key];
+
+                        const classNotesName = [
+                            'note',
+                            `n${key}`,
+                            note.toLowerCase(),
+                            note.includes('#') ? 'hash' : ''
+                        ].filter(Boolean).join(' ');
 
                         notesForEach.push(
                             <div key={key} className={classNotesName}>
