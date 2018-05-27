@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import { toggleShowAllNotes, changeGuitarType} from '../../store/actions/guitar';
+import { 
+    toggleShowAllNotes, 
+    changeGuitarType,
+    changeGuitarAnswerTiming
+} from '../../store/actions/guitar';
 import { userInitLoad} from '../../store/actions/user';
 
 import StandartButton from '../../ui/buttons/StandartButton';
@@ -23,12 +27,31 @@ class Header extends PureComponent {
         }
     }
 
+    handleGuitarAnserTimingChange = selectedOption => {
+        const selectedTimingAnwer = selectedOption.value;
+        if (selectedTimingAnwer){
+            this.props.changeGuitarAnswerTiming(selectedTimingAnwer)
+        }
+    }
+
     render() {
         const guitarTypeName = ['Standart','Bass','Ukulele'];
-        const selectOptions = this.props.guitarTypeList.map((item, i) => {
+        const {
+            guitarTypeList,
+            guitarType,
+            guitarAnswerTiming:{
+                currentTiming,
+                timingList
+            }
+        } = this.props;
 
-            return { value: item, label: guitarTypeName[i],}
+        const selectGuitarTypeOpt = guitarTypeList.map((item, i) => {
+            return { value: item, label: guitarTypeName[i] || '',}
         })
+        const selectGuitarTimingOpt = timingList.map((item, i) => {
+            return { value: item, label: item/1000+'s',}
+        })
+
         return(
             <div className="Header">
                 <div className="logo">
@@ -37,16 +60,25 @@ class Header extends PureComponent {
 
                 <div className="controls">
                     <div className="select select-guitarType">
-
                         <Select
-                            value={this.props.guitarType}
+                            value={guitarType}
                             onChange={this.handleGuitarTypeChange}
-                            options={selectOptions}
+                            options={selectGuitarTypeOpt}
                             clearable={false}
                             searchable={false}
                             multi={false}
                         />
+                    </div>
 
+                     <div className="select select-guitarType">
+                        <Select
+                            value={currentTiming}
+                            onChange={this.handleGuitarAnserTimingChange}
+                            options={selectGuitarTimingOpt}
+                            clearable={false}
+                            searchable={false}
+                            multi={false}
+                        />
                     </div>
 
                     <StandartButton
@@ -65,6 +97,7 @@ const mapStateToProps = state => {
     return {
         guitarTypeList: state.guitar.guitarTypeList,
         guitarType: state.guitar.guitarType,
+        guitarAnswerTiming:state.guitar.guitarAnswerTiming
     }
 }
 
@@ -73,6 +106,7 @@ export default connect(
     {
         toggleShowAllNotes,
         userInitLoad,
-        changeGuitarType
+        changeGuitarType,
+        changeGuitarAnswerTiming
     }
 )(Header);

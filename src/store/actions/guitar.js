@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import { setToLocalStorage } from '../../services/localStorage';
 
-const ANSWER_TIMING = 3000;
 let userSelectNoteTimer;
 
 export const trainStart = () => {
@@ -18,7 +17,11 @@ export const trainEnd = () => {
 
 export const userSelectedNote = userAnswerNote => {
     return (dispatch, getState) => {
+
         clearTimeout(userSelectNoteTimer)
+
+        const {guitarAnswerTiming:{currentTiming}} = getState().guitar;
+
         dispatch({
             type: actionTypes.USER_SELECTED_NOTE_START,
             payload: {userAnswerNote}
@@ -32,7 +35,7 @@ export const userSelectedNote = userAnswerNote => {
                     type: actionTypes.USER_SELECTED_NOTE_END
                 })
             }
-        }, ANSWER_TIMING);
+        }, currentTiming);
     };
 }
 
@@ -49,5 +52,13 @@ export const changeGuitarType = guitarType => {
     return {
         type: actionTypes.CHANGE_GUITAR_TYPE,
         payload: { guitarType }
+    };
+}
+
+export const changeGuitarAnswerTiming = unswerTiming => {
+    setToLocalStorage('guitarTrainer__unswerTiming', unswerTiming);
+    return {
+        type: actionTypes.CHANGE_GUITAR_ANSWER_TIMING,
+        payload: unswerTiming
     };
 }
