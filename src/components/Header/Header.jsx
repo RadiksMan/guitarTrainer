@@ -5,10 +5,12 @@ import 'react-select/dist/react-select.css';
 
 import { 
     toggleShowAllNotes, 
-    changeGuitarType,
-    changeGuitarAnswerTiming
+    changeGuitarType
 } from '../../store/actions/guitar';
-import { userInitLoad} from '../../store/actions/user';
+import { 
+    userInitLoad,
+    changeUserAnswerTiming
+} from '../../store/actions/user';
 
 import StandartButton from '../../ui/buttons/StandartButton';
 import HeaderLogo from './HeaderLogo';
@@ -30,7 +32,7 @@ class Header extends PureComponent {
     handleGuitarAnserTimingChange = selectedOption => {
         const selectedTimingAnwer = selectedOption.value;
         if (selectedTimingAnwer){
-            this.props.changeGuitarAnswerTiming(selectedTimingAnwer)
+            this.props.changeUserAnswerTiming(selectedTimingAnwer)
         }
     }
 
@@ -39,7 +41,7 @@ class Header extends PureComponent {
         const {
             guitarTypeList,
             guitarType,
-            guitarAnswerTiming:{
+            userUnswerTiming:{
                 currentTiming,
                 timingList
             }
@@ -49,7 +51,7 @@ class Header extends PureComponent {
             return { value: item, label: guitarTypeName[i] || '',}
         })
         const selectGuitarTimingOpt = timingList.map((item, i) => {
-            return { value: item, label: item/1000+'s',}
+            return { value: item, label: `Answer time - ${item/1000}s`}
         })
 
         return(
@@ -59,7 +61,7 @@ class Header extends PureComponent {
                 </div>
 
                 <div className="controls">
-                    <div className="select select-guitarType">
+                    <div className="select select-guitar">
                         <Select
                             value={guitarType}
                             onChange={this.handleGuitarTypeChange}
@@ -70,7 +72,7 @@ class Header extends PureComponent {
                         />
                     </div>
 
-                     <div className="select select-guitarType">
+                     <div className="select select-guitar">
                         <Select
                             value={currentTiming}
                             onChange={this.handleGuitarAnserTimingChange}
@@ -97,7 +99,7 @@ const mapStateToProps = state => {
     return {
         guitarTypeList: state.guitar.guitarTypeList,
         guitarType: state.guitar.guitarType,
-        guitarAnswerTiming:state.guitar.guitarAnswerTiming
+        userUnswerTiming:state.user.userUnswerTiming
     }
 }
 
@@ -107,6 +109,6 @@ export default connect(
         toggleShowAllNotes,
         userInitLoad,
         changeGuitarType,
-        changeGuitarAnswerTiming
+        changeUserAnswerTiming
     }
 )(Header);

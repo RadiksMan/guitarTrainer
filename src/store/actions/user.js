@@ -26,10 +26,25 @@ export const userInitLoad = () => {
             payload['guitarType'] = guitarType;
         }
 
+        const userCurrentTiming = getFromLocalStorage('guitarTrainer__userUnswerTiming');
+        if (userCurrentTiming){
+            payload['userUnswerTiming'] = {
+                currentTiming:userCurrentTiming
+            }
+        }
+        
         dispatch({
             type: actionTypes.USER_INIT_LOAD,
             payload
         })
 
     }
+}
+
+export const changeUserAnswerTiming = userUnswerTiming => {
+    setToLocalStorage('guitarTrainer__userUnswerTiming', userUnswerTiming);
+    return {
+        type: actionTypes.CHANGE_USER_ANSWER_TIMING,
+        payload: userUnswerTiming
+    };
 }

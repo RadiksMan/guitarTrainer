@@ -21,10 +21,6 @@ const guitarType = [
 const initialState = {
   guitarType: guitarType[0],
   guitarTypeList: guitarType,
-  guitarAnswerTiming: {
-    currentTiming: 3000,
-    timingList: [1000, 2000, 3000, 5000, 10000]
-  },
   guitarConfig: guitars[guitarType[0]],
 
   trainingStart: false,
@@ -93,24 +89,13 @@ export default (state = initialState, action) => {
         guitarType: action.payload.guitarType,
         guitarConfig: guitars[action.payload.guitarType]
       }
-    case actionTypes.CHANGE_GUITAR_ANSWER_TIMING:
-      if (state.guitarAnswerTiming.timingList.includes(action.payload)) {
-        return {
-          ...state,
-          guitarAnswerTiming: {
-            ...state.guitarAnswerTiming,
-            currentTiming: action.payload
-          }
-        }
-      }
-      return state;
     case actionTypes.USER_INIT_LOAD:
       //USER_INIT_LOAD(from user reducers) - detect what guitarType load
       const { guitarType } = action.payload;
-      if (guitarType && action.payload.guitarType !== state.guitarType) {
+      if (guitarType && guitarType !== state.guitarType) {
         return {
           ...state,
-          guitarType: action.payload.guitarType
+          guitarType
         }
       }
       return state;

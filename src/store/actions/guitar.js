@@ -20,7 +20,7 @@ export const userSelectedNote = userAnswerNote => {
 
         clearTimeout(userSelectNoteTimer)
 
-        const {guitarAnswerTiming:{currentTiming}} = getState().guitar;
+        const {userUnswerTiming:{currentTiming}} = getState().user;
 
         dispatch({
             type: actionTypes.USER_SELECTED_NOTE_START,
@@ -55,10 +55,3 @@ export const changeGuitarType = guitarType => {
     };
 }
 
-export const changeGuitarAnswerTiming = unswerTiming => {
-    setToLocalStorage('guitarTrainer__unswerTiming', unswerTiming);
-    return {
-        type: actionTypes.CHANGE_GUITAR_ANSWER_TIMING,
-        payload: unswerTiming
-    };
-}
