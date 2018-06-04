@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import { 
-    toggleShowAllNotes, 
-    changeGuitarType
+import {
+    toggleShowAllNotes,
+    changeGuitarType,
+    changeGuitarSharpVisibility
 } from '../../store/actions/guitar';
-import { 
+import {
     userInitLoad,
     changeUserAnswerTiming
 } from '../../store/actions/user';
@@ -61,6 +62,16 @@ class Header extends PureComponent {
                 </div>
 
                 <div className="controls">
+
+                    <div>
+                        <input
+                            type="checkbox"
+                            onChange={e =>{
+                                this.props.changeGuitarSharpVisibility(e.target.checked)
+                            }}
+                        />
+                    </div>
+
                     <div className="select select-guitar">
                         <Select
                             value={guitarType}
@@ -109,6 +120,7 @@ export default connect(
         toggleShowAllNotes,
         userInitLoad,
         changeGuitarType,
-        changeUserAnswerTiming
+        changeUserAnswerTiming,
+        changeGuitarSharpVisibility
     }
 )(Header);

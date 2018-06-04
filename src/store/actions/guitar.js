@@ -55,3 +55,10 @@ export const changeGuitarType = guitarType => {
     };
 }
 
+export const changeGuitarSharpVisibility = visibility => {
+    console.log('visibility', visibility)
+    return {
+        type: actionTypes.CHANGE_GUITAR_SHARP_VISIBILITY,
+        payload: { withoutSharps: visibility}
+    }
+}

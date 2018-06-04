@@ -3,7 +3,8 @@ import * as guitars from "../../json/guitar.json";
 
 import {
   generateNoteQuestion,
-  verifyCorrectUserAnswer
+  verifyCorrectUserAnswer,
+  generateWithoutSharps
 } from "../../services/guitarQuest";
 
 const guitarStage = [
@@ -22,6 +23,7 @@ const initialState = {
   guitarType: guitarType[0],
   guitarTypeList: guitarType,
   guitarConfig: guitars[guitarType[0]],
+  withoutSharps:true,
 
   trainingStart: false,
   stage: guitarStage[0],
@@ -38,7 +40,7 @@ export default (state = initialState, action) => {
         trainingStart: true,
         stage: guitarStage[1],
         questionNote: generateNoteQuestion(
-          state.guitarConfig,
+          state.withoutSharps ? generateWithoutSharps(state.guitarConfig) : state.guitarConfig,
           state.questionNote
         ),
         showAllNotes: false,
@@ -68,7 +70,7 @@ export default (state = initialState, action) => {
         stage: guitarStage[1],
         userAnswer: false,
         questionNote: generateNoteQuestion(
-          state.guitarConfig,
+          state.withoutSharps ? generateWithoutSharps(state.guitarConfig) : state.guitarConfig,
           state.questionNote
         )
       };
@@ -87,11 +89,22 @@ export default (state = initialState, action) => {
         userAnswer: false,
         trainingStart: false,
         guitarType: action.payload.guitarType,
-        guitarConfig: guitars[action.payload.guitarType]
+        guitarConfig: state.withoutSharps ? generateWithoutSharps(guitars[action.payload.guitarType]) : guitars[action.payload.guitarType]
+      }
+    case actionTypes.CHANGE_GUITAR_SHARP_VISIBILITY:
+      const { withoutSharps } = action.payload;
+      return {
+        ...state,
+        withoutSharps,
+        stage: guitarStage[0],
+        userAnswer: false,
+        trainingStart: false,
+        guitarConfig: withoutSharps ? generateWithoutSharps(guitars[state.guitarType]) : guitars[state.guitarType]
       }
     case actionTypes.USER_INIT_LOAD:
       //USER_INIT_LOAD(from user reducers) - detect what guitarType load
       const { guitarType } = action.payload;
+      console.log('action.payload', action.payload)
       if (guitarType && guitarType !== state.guitarType) {
         return {
           ...state,

@@ -36,5 +36,25 @@ export const verifyCorrectUserAnswer = (userAnswerNote, questionNote) => {
         userAnswerNote,
         correctUnswerNote:questionNote
     }
-    
+
 };
+
+export const generateWithoutSharps = guitarConfig => {
+
+  console.log('guitarConfig', guitarConfig)
+  const { frets } = guitarConfig;
+
+  frets.map((fret, index) => {
+
+    Object.keys(fret).forEach((key) => {
+      const { note } = fret[key];
+      if(note.includes('#')){
+        delete fret[key];
+      }
+
+    })
+  })
+
+  console.log('Object.assign({}, ...guitarConfig, frets)', Object.assign({}, ...guitarConfig, frets))
+  return Object.assign({}, ...guitarConfig, frets);
+}
