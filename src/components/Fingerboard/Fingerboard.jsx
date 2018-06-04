@@ -24,11 +24,11 @@ class Fingerboard extends Component {
     }
 
     componentDidMount(){
-        window.addEventListener('resize',()=>this.moveArrowToQuestionNote(this.questionNoteDom))
+        window.addEventListener('resize',() => this.moveArrowToQuestionNote(this.questionNoteDom, true))
     }
 
     componentWillUnmount(){
-        window.removeEventListener('resize',this.moveArrowToQuestionNote(this.questionNoteDom))
+        window.removeEventListener('resize', () => this.moveArrowToQuestionNote(this.questionNoteDom,true))
     }
 
     UNSAFE_componentWillReceiveProps(nextProps){
@@ -101,8 +101,8 @@ class Fingerboard extends Component {
         guitarNeck.firstChild.classList.toggle('show-all-notes')
     }
 
-    moveArrowToQuestionNote = questionNoteDom => {
-        if (!questionNoteDom) return false;
+    moveArrowToQuestionNote = (questionNoteDom,resize) => {
+        if (!questionNoteDom || (resize && this.props.stage == null)) return false;
 
         const arrow = this.arrowRef.current;
         const guitarNeck = this.guitarNackRef.current;

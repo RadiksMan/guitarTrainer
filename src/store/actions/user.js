@@ -27,12 +27,12 @@ export const userInitLoad = () => {
         }
 
         const userCurrentTiming = getFromLocalStorage('guitarTrainer__userUnswerTiming');
-        if (userCurrentTiming){
+        if (typeof userCurrentTiming === 'number'){
             payload['userUnswerTiming'] = {
                 currentTiming:userCurrentTiming
             }
         }
-        
+
         dispatch({
             type: actionTypes.USER_INIT_LOAD,
             payload

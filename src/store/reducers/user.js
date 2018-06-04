@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
         case actionTypes.USER_INIT_LOAD:
             const {
                 guitarType,
-                userUnswerTiming:{currentTiming}, 
+                userUnswerTiming,
                 ...restPayload
             } = action.payload;
 
@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
                 ...restPayload,
                 userUnswerTiming:{
                     ...state.userUnswerTiming,
-                    currentTiming
+                    currentTiming: userUnswerTiming ? userUnswerTiming['currentTiming'] : initialState['userUnswerTiming']['currentTiming']
                 }
             }
         case actionTypes.CHANGE_USER_ANSWER_TIMING:
