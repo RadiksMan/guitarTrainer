@@ -7,6 +7,8 @@ import {
   generateWithoutSharps
 } from "../../services/guitarQuest";
 
+
+
 const guitarStage = [
   null, //0 - init state
   "showQuestion", //1 - user start the train and sees question icon on guitar neck
@@ -23,7 +25,7 @@ const initialState = {
   guitarType: guitarType[0],
   guitarTypeList: guitarType,
   guitarConfig: guitars[guitarType[0]],
-  withoutSharps:true,
+  withoutSharps:false,
 
   trainingStart: false,
   stage: guitarStage[0],
@@ -33,6 +35,8 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+
+  console.log("action.type ", action.type);
   switch (action.type) {
     case actionTypes.START_TRAIN:
       return {
@@ -40,7 +44,7 @@ export default (state = initialState, action) => {
         trainingStart: true,
         stage: guitarStage[1],
         questionNote: generateNoteQuestion(
-          state.withoutSharps ? generateWithoutSharps(state.guitarConfig) : state.guitarConfig,
+          state.withoutSharps ? generateWithoutSharps(state.guitarType) : state.guitarConfig,
           state.questionNote
         ),
         showAllNotes: false,
@@ -70,7 +74,7 @@ export default (state = initialState, action) => {
         stage: guitarStage[1],
         userAnswer: false,
         questionNote: generateNoteQuestion(
-          state.withoutSharps ? generateWithoutSharps(state.guitarConfig) : state.guitarConfig,
+          state.withoutSharps ? generateWithoutSharps(state.guitarType) : state.guitarConfig,
           state.questionNote
         )
       };
@@ -89,22 +93,31 @@ export default (state = initialState, action) => {
         userAnswer: false,
         trainingStart: false,
         guitarType: action.payload.guitarType,
-        guitarConfig: state.withoutSharps ? generateWithoutSharps(guitars[action.payload.guitarType]) : guitars[action.payload.guitarType]
+        guitarConfig: state.withoutSharps ? generateWithoutSharps(action.payload.guitarType) : guitars[action.payload.guitarType]
       }
     case actionTypes.CHANGE_GUITAR_SHARP_VISIBILITY:
+    //console.log('state',state)
       const { withoutSharps } = action.payload;
-      return {
+ //console.log("withoutSharps ", withoutSharps);
+ //console.log(" guitars 1",  guitars);
+
+ //console.log("guitarsRequire ", guitarsRequire());
+ console.log(" guitarConfig: withoutSharps ? ", withoutSharps ? generateWithoutSharps(state.guitarType) : guitars[state.guitarType]);
+
+      const test1 =  {
         ...state,
         withoutSharps,
         stage: guitarStage[0],
         userAnswer: false,
         trainingStart: false,
-        guitarConfig: withoutSharps ? generateWithoutSharps(guitars[state.guitarType]) : guitars[state.guitarType]
+        guitarConfig: withoutSharps ? generateWithoutSharps(state.guitarType) : guitars[state.guitarType]
       }
+      console.log("test1 ", test1);
+      return test1;
     case actionTypes.USER_INIT_LOAD:
       //USER_INIT_LOAD(from user reducers) - detect what guitarType load
       const { guitarType } = action.payload;
-      console.log('action.payload', action.payload)
+      //console.log('action.payload', action.payload)
       if (guitarType && guitarType !== state.guitarType) {
         return {
           ...state,

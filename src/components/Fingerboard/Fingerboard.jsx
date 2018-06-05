@@ -150,7 +150,7 @@ class Fingerboard extends Component {
 
     render() {
         // eslint-disable-next-line
-        const { guitarType } = this.props;
+        const { guitarConfig } = this.props;
         const { guitarTypeModule: GuitarMarkupComponent } = this.state;
 
         return (
@@ -166,7 +166,7 @@ class Fingerboard extends Component {
                     >
                         {GuitarMarkupComponent &&
                             <GuitarMarkupComponent
-                            {...guitarConfig[guitarType]}
+                            {...guitarConfig}
                             />
                         }
                     </div>
@@ -205,6 +205,7 @@ const mapStateToProps = state => {
         stage:state.guitar.stage,
         showAllNotes:state.guitar.showAllNotes,
         guitarType: state.guitar.guitarType,
+        guitarConfig: state.guitar.guitarConfig
     }
 }
 

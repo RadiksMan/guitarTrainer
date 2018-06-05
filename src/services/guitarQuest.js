@@ -12,49 +12,60 @@ export const generateNoteQuestion = (guitarConfig, oldQuestionNote) => {
   }
 
   return questionNote;
-};
+}
 
 const generateNewQuestionNote = frets => {
-  const randomFretNumber = Math.floor(Math.random() * frets.length);
-  const randomFret = frets[randomFretNumber];
 
-  const randomNoteProperty = pickRandomProperty(randomFret);
+  let randomFretNumber, randomFret;
+  const getRandomFretNumber = () => Math.floor(Math.random() * frets.length);
+
+  randomFretNumber = getRandomFretNumber();
+  randomFret = frets[randomFretNumber];
+
+  while (Object.keys(randomFret).length === 0) {
+    //check if random Fret is empty - get new fret
+    randomFretNumber = getRandomFretNumber();
+    randomFret = frets[randomFretNumber];
+  }
+
+  let randomNoteProperty = pickRandomProperty(randomFret);
+
   const randomNote = randomFret[randomNoteProperty];
-
   return {
     fretNumber: randomFretNumber,
     noteNumber: +randomNoteProperty,
     noteName: randomNote["note"]
-  };
-};
+  }
+}
 
 export const verifyCorrectUserAnswer = (userAnswerNote, questionNote) => {
-    const {noteName} = questionNote;
+  const { noteName } = questionNote;
 
-    return {
-        userAnswerCorrect: noteName === userAnswerNote ? true : false,
-        userAnswerNote,
-        correctUnswerNote:questionNote
-    }
+  return {
+    userAnswerCorrect: noteName === userAnswerNote ? true : false,
+    userAnswerNote,
+    correctUnswerNote: questionNote
+  }
 
-};
+}
 
-export const generateWithoutSharps = guitarConfig => {
-
-  console.log('guitarConfig', guitarConfig)
-  const { frets } = guitarConfig;
+export const generateWithoutSharps = (type) => {
+  const guitarConfigClone = guitarsRequire(type);
+  const { frets } = guitarConfigClone;
 
   frets.map((fret, index) => {
-
     Object.keys(fret).forEach((key) => {
       const { note } = fret[key];
-      if(note.includes('#')){
+      if (note.includes('#')) {
         delete fret[key];
       }
-
     })
   })
+  return guitarConfigClone;
+}
 
-  console.log('Object.assign({}, ...guitarConfig, frets)', Object.assign({}, ...guitarConfig, frets))
-  return Object.assign({}, ...guitarConfig, frets);
+export const guitarsRequire = type => {
+  delete require.cache[require.resolve("../json/guitar.json")];
+  const guitars = require('../json/guitar.json');
+  return type ? guitars[type] : guitars;
 }
