@@ -16,7 +16,7 @@ class FingerboardButtons extends PureComponent {
   buttonHolder = React.createRef();
   notes = ["a", "a#", "b", "c", "c#", "d", "d#", "e", "f", "f#", "g", "g#"];
   keycodeNotes = [49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 189, 187];
-  keyboardNotes = ['1','2','3','4','5','6','7','8','9','0','-','='];
+  keyboardNotes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
 
   componentWillMount() {
     document.addEventListener("keydown", this.hendleKeyDown, false);
@@ -41,16 +41,20 @@ class FingerboardButtons extends PureComponent {
         }
         break;
       case null:
-        if(!nextProps.showAllNotes){
+        if (!nextProps.showAllNotes) {
           this.answerToUserClear();
         }
     }
   }
 
   hendleKeyDown = ({ keyCode }) => {
-    const { stage, userSelectedNote } = this.props;
+    const { stage, userSelectedNote, withoutSharps } = this.props;
     if (stage === "showQuestion" && this.keycodeNotes.includes(keyCode)) {
+
       const note = this.notes[this.keycodeNotes.indexOf(keyCode)];
+      //check if withoutSharps is true and selected note has # -> return false
+      if(withoutSharps && note.includes('#')) return false;
+
       userSelectedNote(note.toUpperCase());
     }
     if (keyCode === 32) {
@@ -106,7 +110,7 @@ class FingerboardButtons extends PureComponent {
   };
 
   render() {
-    const { trainingStart } = this.props;
+    const { trainingStart, withoutSharps } = this.props;
 
     return (
       <div className="FingerboardButtons" ref={this.buttonHolder}>
@@ -125,9 +129,11 @@ class FingerboardButtons extends PureComponent {
           transitionLeaveTimeout={200}>
           {
             this.props.trainingStart && this.notes.map((note, i) => {
+              const disabled = (withoutSharps && note.includes('#')) ? true : false;
               return (
                 <li
                   key={i}
+                  data-disabled={disabled}
                   data-note={note}
                   onClick={() => this.pressOnNote(note)}
                 >
@@ -149,7 +155,8 @@ const mapStateToProps = state => {
     trainingStart: state.guitar.trainingStart,
     questionNote: state.guitar.questionNote,
     stage: state.guitar.stage,
-    userAnswer: state.guitar.userAnswer
+    userAnswer: state.guitar.userAnswer,
+    withoutSharps: state.guitar.withoutSharps
   };
 };
 

@@ -20,17 +20,17 @@ export const userSelectedNote = userAnswerNote => {
 
         clearTimeout(userSelectNoteTimer)
 
-        const {userUnswerTiming:{currentTiming}} = getState().user;
+        const { userUnswerTiming: { currentTiming } } = getState().user;
 
         dispatch({
             type: actionTypes.USER_SELECTED_NOTE_START,
-            payload: {userAnswerNote}
+            payload: { userAnswerNote }
         })
 
         userSelectNoteTimer = setTimeout(() => {
-            const {stage} = getState().guitar;
+            const { stage } = getState().guitar;
 
-            if (stage !== null){
+            if (stage !== null) {
                 dispatch({
                     type: actionTypes.USER_SELECTED_NOTE_END
                 })
@@ -56,9 +56,11 @@ export const changeGuitarType = guitarType => {
 }
 
 export const changeGuitarSharpVisibility = visibility => {
-    console.log('visibility', visibility)
+
+    setToLocalStorage('guitarTrainer__withoutSharps', visibility);
+
     return {
         type: actionTypes.CHANGE_GUITAR_SHARP_VISIBILITY,
-        payload: { withoutSharps: visibility}
+        payload: { withoutSharps: visibility }
     }
 }

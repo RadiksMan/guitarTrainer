@@ -25,7 +25,7 @@ const initialState = {
   guitarType: guitarType[0],
   guitarTypeList: guitarType,
   guitarConfig: guitars[guitarType[0]],
-  withoutSharps:false,
+  withoutSharps: false,
 
   trainingStart: false,
   stage: guitarStage[0],
@@ -96,15 +96,10 @@ export default (state = initialState, action) => {
         guitarConfig: state.withoutSharps ? generateWithoutSharps(action.payload.guitarType) : guitars[action.payload.guitarType]
       }
     case actionTypes.CHANGE_GUITAR_SHARP_VISIBILITY:
-    //console.log('state',state)
+
       const { withoutSharps } = action.payload;
- //console.log("withoutSharps ", withoutSharps);
- //console.log(" guitars 1",  guitars);
 
- //console.log("guitarsRequire ", guitarsRequire());
- console.log(" guitarConfig: withoutSharps ? ", withoutSharps ? generateWithoutSharps(state.guitarType) : guitars[state.guitarType]);
-
-      const test1 =  {
+      return {
         ...state,
         withoutSharps,
         stage: guitarStage[0],
@@ -112,19 +107,24 @@ export default (state = initialState, action) => {
         trainingStart: false,
         guitarConfig: withoutSharps ? generateWithoutSharps(state.guitarType) : guitars[state.guitarType]
       }
-      console.log("test1 ", test1);
-      return test1;
+
     case actionTypes.USER_INIT_LOAD:
       //USER_INIT_LOAD(from user reducers) - detect what guitarType load
-      const { guitarType } = action.payload;
-      //console.log('action.payload', action.payload)
-      if (guitarType && guitarType !== state.guitarType) {
-        return {
-          ...state,
-          guitarType
-        }
+      const {
+        guitarType = 'standartGuitar',
+        withoutSharps: sharpsShow = false
+      } = action.payload;
+      console.log("action.payload ", action.payload);
+      console.log("guitarType ", guitarType);
+      // guitarType !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      let test =  {
+        ...state,
+        guitarType: (guitarType !== state.guitarType) ? guitarType : 'standartGuitar',
+        withoutSharps:sharpsShow,
+        guitarConfig: sharpsShow ? generateWithoutSharps(guitarType) : guitars[guitarType]
       }
-      return state;
+      console.log('go',test);
+      return test;
 
     default:
       return state;

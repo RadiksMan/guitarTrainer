@@ -44,6 +44,12 @@
                 background: #ff0000;
             }
             &.selected{}
+            &[data-disabled="true"]{
+                pointer-events: none;
+                background-color: rgba(255,255,255,.5);
+                box-shadow:none;
+                span,i{opacity:0.7;}
+            }
 
         span{user-select: none;-webkit-font-smoothing: antialiased;}
     }
