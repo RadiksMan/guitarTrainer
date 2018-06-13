@@ -1,0 +1,81 @@
+.toggle{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    color:white;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin:0 2px;
+    text-align: center;
+}
+
+.toggle-input-holder {
+  width: 60px;
+  height: 30px;
+  position: relative;
+  margin-top: -6px;
+}
+
+.toggle input[type="checkbox"] {
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+  appearance: none;
+  background: rgba(255,255,255,.6);
+  border-radius: 2px;
+  position: relative;
+  outline: 0;
+  transition: all 0.2s;
+}
+
+.toggle input[type="checkbox"]:after {
+  position: absolute;
+  content: "";
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 24px;
+  background: #fff;
+  z-index: 2;
+  border-radius: 2px;
+  transition: all 0.35s;
+}
+
+.toggle svg {
+  position: absolute;
+  top: 50%;
+  transform-origin: 50% 50%;
+  fill: #fff;
+  transition: all 0.35s;
+  z-index: 1;
+}
+
+.toggle .is_checked {
+  width: 13px;
+  left: 18%;
+  transform: translateX(190%) translateY(-30%) scale(0);
+}
+
+.toggle .is_unchecked {
+  width: 11px;
+  right: 10%;
+  transform: translateX(0) translateY(-30%) scale(1);
+}
+
+/* Checked State */
+.toggle input.toggle-on {
+    background: rgba(255,255,255,.4);
+}
+
+.toggle input.toggle-on:after {
+  left: calc(100% - 29px);
+}
+
+.toggle input.toggle-on + .is_checked {
+  transform: translateX(0) translateY(-30%) scale(1);
+}
+
+.toggle input.toggle-on ~ .is_unchecked {
+  transform: translateX(-190%) translateY(-30%) scale(0);
+}

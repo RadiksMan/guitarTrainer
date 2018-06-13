@@ -14,62 +14,63 @@ import {
 } from '../../store/actions/user';
 
 import StandartButton from '../../ui/buttons/StandartButton';
+import Checkbox from '../../ui/buttons/Checkbox';
 import HeaderLogo from './HeaderLogo';
 import './style/Header.css';
 
 class Header extends PureComponent {
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.userInitLoad();
     }
 
     handleGuitarTypeChange = selectedOption => {
         const selectedGuitarType = selectedOption.value;
-        if (selectedGuitarType){
+        if (selectedGuitarType) {
             this.props.changeGuitarType(selectedGuitarType)
         }
     }
 
     handleGuitarAnserTimingChange = selectedOption => {
         const selectedTimingAnwer = selectedOption.value;
-        if (selectedTimingAnwer){
+        if (selectedTimingAnwer) {
             this.props.changeUserAnswerTiming(selectedTimingAnwer)
         }
     }
 
     render() {
-        const guitarTypeName = ['Standart','Bass','Ukulele'];
+        const guitarTypeName = ['Standart', 'Bass', 'Ukulele'];
         const {
             guitarTypeList,
             guitarType,
-            userUnswerTiming:{
+            withoutSharps,
+            userUnswerTiming: {
                 currentTiming,
                 timingList
             }
         } = this.props;
 
         const selectGuitarTypeOpt = guitarTypeList.map((item, i) => {
-            return { value: item, label: guitarTypeName[i] || '',}
+            return { value: item, label: guitarTypeName[i] || '', }
         })
         const selectGuitarTimingOpt = timingList.map((item, i) => {
-            return { value: item, label: `Answer time - ${item/1000}s`}
+            return { value: item, label: `Answer time - ${item / 1000}s` }
         })
 
-        return(
+        return (
             <div className="Header">
                 <div className="logo">
-                    <HeaderLogo/>
+                    <HeaderLogo />
                 </div>
 
                 <div className="controls">
 
                     <div>
-                        <input
-                            type="checkbox"
-                            onChange={e =>{
-                                this.props.changeGuitarSharpVisibility(e.target.checked)
-                            }}
-                        />
+                        <Checkbox onToggle={this.props.changeGuitarSharpVisibility} checked={withoutSharps}>
+                            <Checkbox.On>Without sharps is on&nbsp;</Checkbox.On>
+                            <Checkbox.Off>Without sharps is off</Checkbox.Off>
+                            <Checkbox.Button />
+                        </Checkbox>
                     </div>
 
                     <div className="select select-guitar">
@@ -83,7 +84,7 @@ class Header extends PureComponent {
                         />
                     </div>
 
-                     <div className="select select-guitar">
+                    <div className="select select-guitar">
                         <Select
                             value={currentTiming}
                             onChange={this.handleGuitarAnserTimingChange}
@@ -110,7 +111,8 @@ const mapStateToProps = state => {
     return {
         guitarTypeList: state.guitar.guitarTypeList,
         guitarType: state.guitar.guitarType,
-        userUnswerTiming:state.user.userUnswerTiming
+        userUnswerTiming: state.user.userUnswerTiming,
+        withoutSharps: state.guitar.withoutSharps,
     }
 }
 
