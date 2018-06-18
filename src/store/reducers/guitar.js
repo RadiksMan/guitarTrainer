@@ -8,23 +8,22 @@ import {
 } from "../../services/guitarQuest";
 
 
-
 const guitarStage = [
   null, //0 - init state
   "showQuestion", //1 - user start the train and sees question icon on guitar neck
   "showAnswer", //2 - user select answer note and see correct/uncorrect "answer"
 ];
 
-const guitarType = [
+const guitarTypeList = [
   'standartGuitar',
   'bassGuitar',
   'ukuleleGuitar'
 ]
 
 const initialState = {
-  guitarType: guitarType[0],
-  guitarTypeList: guitarType,
-  guitarConfig: guitars[guitarType[0]],
+  guitarType: guitarTypeList[0],
+  guitarTypeList: guitarTypeList,
+  guitarConfig: guitars[guitarTypeList[0]],
   withoutSharps: false,
 
   trainingStart: false,
@@ -111,20 +110,22 @@ export default (state = initialState, action) => {
     case actionTypes.USER_INIT_LOAD:
       //USER_INIT_LOAD(from user reducers) - detect what guitarType load
       const {
-        guitarType = 'standartGuitar',
-        withoutSharps: sharpsShow = false
+        guitarType = guitarTypeList[0],
+        withoutSharps: withoutSharpsLoad = false
       } = action.payload;
-      console.log("action.payload ", action.payload);
-      console.log("guitarType ", guitarType);
-      // guitarType !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      let test =  {
+      
+      let stateLoad =  {
         ...state,
-        guitarType: (guitarType !== state.guitarType) ? guitarType : 'standartGuitar',
-        withoutSharps:sharpsShow,
-        guitarConfig: sharpsShow ? generateWithoutSharps(guitarType) : guitars[guitarType]
+        withoutSharps:withoutSharpsLoad,
+        guitarConfig: withoutSharpsLoad ? generateWithoutSharps(guitarType) : guitars[guitarType]
       }
-      console.log('go',test);
-      return test;
+
+      if(guitarType !== state.guitarType){
+        stateLoad['guitarType'] = guitarType;
+      }
+      
+      return stateLoad;
+
 
     default:
       return state;

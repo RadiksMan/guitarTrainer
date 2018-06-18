@@ -49,7 +49,7 @@ class Header extends PureComponent {
                 timingList
             }
         } = this.props;
-
+        console.log('withoutSharps',withoutSharps)
         const selectGuitarTypeOpt = guitarTypeList.map((item, i) => {
             return { value: item, label: guitarTypeName[i] || '', }
         })

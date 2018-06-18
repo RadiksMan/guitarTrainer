@@ -34,8 +34,7 @@ export const userInitLoad = () => {
         }
 
         const withoutSharps = getFromLocalStorage('guitarTrainer__withoutSharps');
- console.log("withoutSharps ", withoutSharps);
-        if (typeof withoutSharps !== 'undefined' && Object.keys(withoutSharps).length !== 0){
+        if (typeof withoutSharps === 'boolean'){
             payload['withoutSharps'] = withoutSharps;
         }
         
