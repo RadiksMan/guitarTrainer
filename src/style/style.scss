@@ -49,3 +49,5 @@ audio {
 #root{height: 100%;width: 100%;display: flex;position: relative;z-index: 1;}
 
 .App,.main{display: flex;flex:1;flex-direction: column;}
+
+.disabled-click{pointer-events:none !important;}

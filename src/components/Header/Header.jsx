@@ -16,9 +16,14 @@ import {
 import StandartButton from '../../ui/buttons/StandartButton';
 import Checkbox from '../../ui/buttons/Checkbox';
 import HeaderLogo from './HeaderLogo';
+import Instruction from './Instruction';
 import './style/Header.css';
 
 class Header extends PureComponent {
+
+    state = {
+        instruction:false
+    }
 
     componentWillMount() {
         this.props.userInitLoad();
@@ -60,6 +65,11 @@ class Header extends PureComponent {
 
         return (
             <div className="Header">
+
+                <Instruction
+                    run={this.state.instruction}
+                />
+
                 <div className="logo">
                     <HeaderLogo />
                 </div>
@@ -102,6 +112,12 @@ class Header extends PureComponent {
                         keycupsName="backspace"
                         wide
                     />
+
+                    <StandartButton
+                        onClick={() => this.setState({instruction:!this.state.instruction})}
+                        text="See instruction"
+                    />
+
                 </div>
             </div>
         )
