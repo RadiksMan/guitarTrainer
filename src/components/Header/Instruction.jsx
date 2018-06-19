@@ -1,15 +1,19 @@
 import React, { PureComponent } from 'react';
 import Joyride from "react-joyride";
+import { ACTIONS, EVENTS } from 'react-joyride/es/constants';
 import { connect } from 'react-redux';
 import {
     trainStart,
     trainEnd
 } from "../../store/actions/guitar";
 
+import StandartButton from '../../ui/buttons/StandartButton';
+
 class Instruction extends PureComponent {
 
     state = {
         stepIndex: 0,
+        run:false,
         steps: [
             {
                 content: "Let's start the tour!",
@@ -55,7 +59,7 @@ class Instruction extends PureComponent {
                         zIndex: 10000
                     }
                 },
-                target: ".guitar-neck .note.question",
+                target: ".Fingerboard .note.question",
                 title: "Arrow"
             },
             // {
@@ -85,57 +89,83 @@ class Instruction extends PureComponent {
         ]
     };
 
+    handleJoyrideCallback = tour => {
+ console.log("tour ", tour);
 
-    handleJoyrideCallback = data => {
-        console.log('data', data)
-        const { joyride } = this.props;
-        const { type } = data;
-        //fires when user click on button
-        if(data.action === 'start'){
+        const { action, index, type } = tour;
+
+        if (type === EVENTS.TOUR_START){
+            console.log('1111');
             this.props.trainStart();
             document.querySelectorAll('.btn,.notes-list,.toggle,.select').forEach(item =>
                 item.classList.add('disabled-click')
             );
-        }
+        } else if (type === EVENTS.TOUR_END) {
+          // Update user preferences with completed tour flag
+            this.setState({ run: false,stepIndex:0 });
 
-        if (data.action === 'close' || data.status === 'finished' || data.action === 'skip') {
             this.props.trainEnd();
             document.querySelectorAll('.btn,.notes-list,.toggle,.select').forEach(item =>
                 item.classList.remove('disabled-click')
             );
+        } else if ([EVENTS.STEP_AFTER, EVENTS.CLOSE, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+          // Sunce this is a controlled tour you'll need to update the state to advance the tour
+          this.setState({ stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) });
+
+
+          console.log('333');
         }
+        
     };
 
     render(){
 
-        let { steps } = this.state;
+        let { steps,run,stepIndex } = this.state;
 
         return(
-            <Joyride
-                continuous
-                floaterProps={{
-                    styles: {
-                        floater: {
-                            transform: "scale(0.1)"
-                        },
-                        floaterOpening: {
-                            transform: "perspective(1px) scale(1)"
-                        },
-                        floaterWithAnimation: {
-                            transform: "perspective(1px) scale(1)"
-                        },
-                        floaterCentered: {
-                            transform: "perspective(1px) scale(1) translate(-50%, -50%)"
+            <div >
+                <Joyride
+                    continuous
+                    floaterProps={{
+                        styles: {
+                            floater: {
+                                transform: "scale(0.1)"
+                            },
+                            floaterOpening: {
+                                transform: "perspective(1px) scale(1)"
+                            },
+                            floaterWithAnimation: {
+                                transform: "perspective(1px) scale(1)"
+                            },
+                            floaterCentered: {
+                                transform: "perspective(1px) scale(1) translate(-50%, -50%)"
+                            }
                         }
-                    }
-                }}
-                scrollToFirstStep
-                showProgress
-                showSkipButton
-                run={this.props.run}
-                steps={steps}
-                callback={this.handleJoyrideCallback}
-            />
+                    }}
+                    styles={{
+                        options: {
+                            arrowColor: '#fff',
+                            backgroundColor: '#fff',
+                            primaryColor: '#ffa409',
+                            textColor: 'black',
+                        }
+                      }}
+                    scrollToFirstStep
+                    showProgress
+                    showSkipButton={false}
+                    stepIndex={stepIndex}
+                    run={run}
+                    steps={steps}
+                    callback={this.handleJoyrideCallback}
+                />
+
+                <StandartButton
+                    //style={{marginLeft:'0px'}}
+                    onClick={() => this.setState({run:true})}
+                    text="See instruction"
+                    wide
+                />
+            </div>
         )
     }
 }

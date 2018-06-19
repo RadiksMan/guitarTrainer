@@ -31,6 +31,7 @@
   transition:all ease .3s;
   user-select: none;
   &.btn-wide{
+    width: 200px;
     max-width: 200px;
     font-size:15px;
   }

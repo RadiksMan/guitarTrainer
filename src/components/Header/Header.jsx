@@ -66,10 +66,6 @@ class Header extends PureComponent {
         return (
             <div className="Header">
 
-                <Instruction
-                    run={this.state.instruction}
-                />
-
                 <div className="logo">
                     <HeaderLogo />
                 </div>
@@ -113,10 +109,7 @@ class Header extends PureComponent {
                         wide
                     />
 
-                    <StandartButton
-                        onClick={() => this.setState({instruction:!this.state.instruction})}
-                        text="See instruction"
-                    />
+                    <Instruction />
 
                 </div>
             </div>

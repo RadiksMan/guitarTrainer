@@ -3,10 +3,11 @@ import './style/StandartButton.css'
 
 const StandartButton = props => {
 
-    const { onClick,text,keycupsName,wide} = props;
+    const { onClick,text,keycupsName,wide,style = {}} = props;
 
     return(
         <div
+            style={style}
             className={`btn ${wide ? 'btn-wide' : ''} `}
             onClick={onClick}
         >

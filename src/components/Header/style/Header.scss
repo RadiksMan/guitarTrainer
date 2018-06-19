@@ -1,5 +1,5 @@
 .Header{display: flex;align-items: center;justify-content: space-between;padding: 1em 2em;}
-.controls{flex:0.9;display: flex;align-items: center;justify-content: flex-end;
+.controls{display: flex;align-items: center;justify-content: flex-end;width: calc(100% - 100px);
     .btn{margin-bottom: 0;margin-left: 1em;}
 
     //select
