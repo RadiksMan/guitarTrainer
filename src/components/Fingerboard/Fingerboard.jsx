@@ -5,7 +5,6 @@ import {
     trainEnd as trainEndAction,
 } from "../../store/actions/guitar";
 import {getOffset} from '../../services/utility';
-import guitarConfig from '../../json/guitar.json';
 import './style/Fingerboard.css';
 
 class Fingerboard extends Component {

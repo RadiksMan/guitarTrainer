@@ -53,7 +53,8 @@ export const generateWithoutSharps = (type) => {
   const guitarConfigClone = guitarsRequire(type);
   const { frets } = guitarConfigClone;
 
-  frets.map((fret, index) => {
+  // eslint-disable-next-line
+  frets.map((fret) => {
     Object.keys(fret).forEach((key) => {
       const { note } = fret[key];
       if (note.includes('#')) {
