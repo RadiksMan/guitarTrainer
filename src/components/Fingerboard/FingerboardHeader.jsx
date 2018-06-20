@@ -16,14 +16,16 @@ const FingerboardHeader = props => {
         <div className="FingerboardHeader">
             <div className="user-score">
                 <h3>Score</h3>
-                <div className="user-score-item correct">
-                    Correctly - <span>{answers[guitarType].correct}</span>
-                </div>
-                <div className="user-score-item wrong">
-                    Wrong - <span>{answers[guitarType].wrong}</span>
-                </div>
-                <div className="user-score-item all">
-                    Total - {answers[guitarType].all}
+                <div className="user-score-list">
+                    <div className="user-score-item correct">
+                        Correctly - <span>{answers[guitarType].correct}</span>
+                    </div>
+                    <div className="user-score-item wrong">
+                        Wrong - <span>{answers[guitarType].wrong}</span>
+                    </div>
+                    <div className="user-score-item all">
+                        Total - {answers[guitarType].all}
+                    </div>
                 </div>
             </div>
         </div>

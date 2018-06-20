@@ -72,7 +72,7 @@ class Header extends PureComponent {
 
                 <div className="controls">
 
-                    <div>
+                    <div className="checkbox-sharp-toggle">
                         <Checkbox onToggle={this.props.changeGuitarSharpVisibility} checked={withoutSharps}>
                             <Checkbox.On>Without sharps is on&nbsp;</Checkbox.On>
                             <Checkbox.Off>Without sharps is off</Checkbox.Off>
@@ -80,7 +80,7 @@ class Header extends PureComponent {
                         </Checkbox>
                     </div>
 
-                    <div className="select select-guitar">
+                    <div className="select select-guitar select-guitar-type-change">
                         <Select
                             value={guitarType}
                             onChange={this.handleGuitarTypeChange}
@@ -91,7 +91,7 @@ class Header extends PureComponent {
                         />
                     </div>
 
-                    <div className="select select-guitar">
+                    <div className="select select-guitar select-answer-timing">
                         <Select
                             value={currentTiming}
                             onChange={this.handleGuitarAnserTimingChange}
@@ -106,6 +106,7 @@ class Header extends PureComponent {
                         onClick={this.props.toggleShowAllNotes}
                         text="Show all notes"
                         keycupsName="backspace"
+                        className="btn-show-all-notes"
                         wide
                     />
 
